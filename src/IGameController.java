@@ -1,6 +1,6 @@
 import java.util.List;
 
-public interface IRiverCrossingController {
+public interface IGameController {
     /**
      * this method initialize the controller with game strategy according
      * to the level
