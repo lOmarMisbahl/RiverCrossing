@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="600.0" style="-fx-background-color: #3D677F;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.5" layoutX="-2.0" layoutY="75.0" prefHeight="358.0" prefWidth="600.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="356.0" fitWidth="295.0">
+                     <image>
+                        <Image url="@z/level.jpeg" />
+                     </image>
+                  </ImageView>
+                  <TextArea layoutX="48.0" layoutY="28.0" opacity="0.68" prefHeight="294.0" prefWidth="200.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="356.0" fitWidth="295.0">
+                     <image>
+                        <Image url="@z/level.jpeg" />
+                     </image>
+                  </ImageView>
+                  <TextArea layoutX="48.0" layoutY="31.0" opacity="0.68" prefHeight="294.0" prefWidth="200.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <ImageView fitHeight="76.0" fitWidth="600.0">
+         <image>
+            <Image url="@z/level22.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="143.0" layoutY="-4.0" text="choose level" textFill="#f8d2d2">
+         <font>
+            <Font size="58.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
