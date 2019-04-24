@@ -1,3 +1,6 @@
+import Crossers.ICrosser;
+import Strategy.ICrossingStrategy;
+
 import java.util.List;
 
 public interface IGameController {

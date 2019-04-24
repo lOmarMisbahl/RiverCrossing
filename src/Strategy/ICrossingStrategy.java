@@ -1,3 +1,7 @@
+package Strategy;
+
+import Crossers.ICrosser;
+
 import java.util.List;
 
 public interface ICrossingStrategy{

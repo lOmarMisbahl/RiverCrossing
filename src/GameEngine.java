@@ -1,53 +1,73 @@
+import Crossers.ICrosser;
+import Strategy.ICrossingStrategy;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameEngine implements IGameController{
     private static GameEngine ourInstance = new GameEngine();
-
+    private ICrossingStrategy gameStrategy;
+    List<ICrosser> rightBank = new ArrayList<ICrosser>();
+    List<ICrosser> leftBank = new ArrayList<ICrosser>();
+    List<ICrosser> boatRiders = new ArrayList<ICrosser>();
+    String boatPosition = "L";
+    int sails = 0;
     public static GameEngine getInstance() {
         return ourInstance;
     }
-
     private GameEngine() {
+
     }
 
     @Override
     public void newGame(ICrossingStrategy gameStrategy) {
+       this.gameStrategy = gameStrategy;
+       leftBank.addAll(gameStrategy.getInitialCrossers());
+        boatPosition = "L";
 
     }
 
     @Override
     public void resetGame() {
 
+        leftBank.addAll(gameStrategy.getInitialCrossers());
+        rightBank.clear();
+        boatRiders.clear();
+        boatPosition = "L";
+        sails = 0;
     }
 
     @Override
     public String[] getInstructions() {
-        return new String[0];
+        return gameStrategy.getInstructions();
     }
 
     @Override
     public List<ICrosser> getCrossersOnRightBank() {
-        return null;
+        return rightBank;
     }
 
     @Override
     public List<ICrosser> getCrossersOnLeftBank() {
-        return null;
+        return leftBank;
     }
 
     @Override
     public boolean isBoatOnTheLeftBank() {
-        return false;
+        if (boatPosition == "L")
+            return true;
+        else
+            return false;
     }
 
     @Override
     public int getNumberOfSails() {
-        return 0;
+        return sails;
     }
 
     @Override
     public boolean canMove(List<ICrosser> crossers, boolean fromLeftToRightBank) {
-        return false;
+        return gameStrategy.isValid(rightBank,leftBank,boatRiders);
     }
 
     @Override
@@ -74,7 +94,7 @@ public class GameEngine implements IGameController{
     public void redo() {
 
     }
-
+    /******Save/Load ***************/
     @Override
     public void saveGame() {
 
@@ -84,7 +104,7 @@ public class GameEngine implements IGameController{
     public void loadGame() {
 
     }
-
+    //Not Implemented Yet
     @Override
     public List<List<ICrosser>> solveGame() {
         return null;
