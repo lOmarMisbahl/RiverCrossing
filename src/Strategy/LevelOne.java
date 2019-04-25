@@ -1,7 +1,9 @@
 package Strategy;
 
+import Crossers.Farmer;
 import Crossers.ICrosser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LevelOne implements  ICrossingStrategy {
@@ -13,7 +15,12 @@ public class LevelOne implements  ICrossingStrategy {
 
     @Override
     public List<ICrosser> getInitialCrossers() {
-        return null;
+        ArrayList<ICrosser> x = new ArrayList<>();
+        x.add(new Farmer());
+        x.add(new Farmer());
+        x.add(new Farmer());
+        x.add(new Farmer());
+        return x;
     }
 
     @Override
