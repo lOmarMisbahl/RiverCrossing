@@ -1,3 +1,8 @@
+package Strategy;
+
+import Crossers.ICrosser;
+import Strategy.ICrossingStrategy;
+
 import java.util.List;
 
 public class LevelTwo implements ICrossingStrategy {
