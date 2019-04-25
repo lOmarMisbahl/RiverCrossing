@@ -1,17 +1,17 @@
-package Crossers;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.WritableImage;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public abstract class Crosser implements ICrosser{
+public abstract class Crosser implements ICrosser {
     private double Weight;
     private int EatingRank;
     private String Label;
-    private String ID;
     private boolean canSail;
     private boolean onBoat = false;
-
     private ArrayList<BufferedImage> Images;
+
     public boolean isOnBoat(){
         return onBoat;
     }
@@ -20,15 +20,7 @@ public abstract class Crosser implements ICrosser{
         this.onBoat = onBoat;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-    public boolean isThis(String ID){
-        if (this.ID == ID)
-            return true;
-        else
-            return false;
-    }
+
     @Override
     public void setCanSail(boolean canSail) {
         this.canSail = canSail;
@@ -77,5 +69,12 @@ public abstract class Crosser implements ICrosser{
     @Override
     public String getLabelToBeShown() {
         return this.Label;
+    }
+    public ArrayList<WritableImage> ToNormalImages() throws Exception{
+        ArrayList<WritableImage> Images = new ArrayList<>();
+        for (int i =0 ; i < getImages().size(); i++) {
+            Images.add(SwingFXUtils.toFXImage(getImages().get(i), null));
+        }
+        return Images;
     }
 }
