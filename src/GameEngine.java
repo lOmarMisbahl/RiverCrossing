@@ -1,3 +1,4 @@
+import Crossers.Crosser;
 import Crossers.ICrosser;
 import Strategy.ICrossingStrategy;
 
@@ -75,6 +76,7 @@ public class GameEngine implements IGameController{
 
     }
 
+
     @Override
     public boolean canUndo() {
         return false;
@@ -108,5 +110,32 @@ public class GameEngine implements IGameController{
     @Override
     public List<List<ICrosser>> solveGame() {
         return null;
+    }
+
+    public void getOffBoat(ICrosser A, boolean fromLeftToRightBank){
+
+        boatRiders.remove(A);
+        if (fromLeftToRightBank){
+            leftBank.add(A);
+        }else {
+            rightBank.add(A);
+        }
+        A.setOnBoat(false);
+    }
+    public boolean moveToBoat(ICrosser A){
+        if (boatRiders.size()<2){
+            if (isBoatOnTheLeftBank()){
+                leftBank.remove(A);
+
+            }else {
+                rightBank.remove(A);
+            }
+            boatRiders.add(A);
+            A.setOnBoat(true);
+            return true;
+        }else {
+            System.out.println("No more room on boat");
+            return false;
+        }
     }
 }

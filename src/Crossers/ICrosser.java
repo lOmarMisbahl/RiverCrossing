@@ -47,4 +47,7 @@ public void setLabelToBeShown(String label);
 
     public void setCanSail(boolean canSail);
 
+    public boolean isOnBoat();
+
+    public void setOnBoat(boolean onBoat);
 }
