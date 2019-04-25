@@ -7,7 +7,6 @@ public abstract class Crosser implements ICrosser{
     private double Weight;
     private int EatingRank;
     private String Label;
-    private String ID;
     private boolean canSail;
     private boolean onBoat = false;
 
@@ -20,15 +19,7 @@ public abstract class Crosser implements ICrosser{
         this.onBoat = onBoat;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-    public boolean isThis(String ID){
-        if (this.ID == ID)
-            return true;
-        else
-            return false;
-    }
+
     @Override
     public void setCanSail(boolean canSail) {
         this.canSail = canSail;

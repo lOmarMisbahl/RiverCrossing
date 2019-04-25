@@ -1,5 +1,6 @@
 
 import Strategy.LevelOne;
+import Strategy.Test;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.awt.image.BufferedImage;
@@ -39,22 +43,20 @@ public class Controller implements Initializable {
 
     @FXML
     private ImageView Crosser2;
-    @FXML
-    private ImageView Boat;
-    @FXML
-    private ImageView Leftside;
-    @FXML
-    private ImageView Rightside;
     Map<ImageView, ICrosser> myCrossers = new HashMap<>();
 
     ArrayList<ImageView> IV = new ArrayList<>();
+    static boolean init = false;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gameEngine = GameEngine.getInstance();
-
+        if (!init){
+            //gameEngine.newGame(LevelOne);
+            init = true;
+        }
         if (url.toString().contains("Game")) {
 
-            gameEngine.newGame(new LevelOne());
+            gameEngine.newGame(new Test());
             IV.add(Crosser1);
             IV.add(Crosser2);
             IV.add(Crosser3);
@@ -68,7 +70,6 @@ public class Controller implements Initializable {
                     IV.get(i).setImage(image);
                     myCrossers.put(IV.get(i),I);
                     moveToSide(IV.get(i),fromLeftToRightBank);
-                    boatOffset= 0;
                     i++;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -123,14 +124,21 @@ public class Controller implements Initializable {
         }*/
 
     }
-    private int leftOffset = 0;
-    private int rightOffset = 0;
-    private int boatOffset = 0;
-    int offset = 35;
+
+    @FXML
+    private HBox RightSide;
+
+    @FXML
+    private HBox LeftSide;
+
+    @FXML
+    private VBox BoatGroup;
+
+    @FXML
+    private HBox Boat;
     private boolean fromLeftToRightBank = true;
     @FXML
     void moveCrosser(MouseEvent event){
-        System.out.println("hereee");
         ImageView myImageView = ((ImageView)event.getSource());
         ICrosser myCrosser = myCrossers.get(myImageView);
 
@@ -148,26 +156,19 @@ public class Controller implements Initializable {
     }
     void moveToSide(ImageView A,Boolean fromLeftToRightBank){
         if (fromLeftToRightBank){
-            A.setLayoutX(Leftside.getLayoutX()+leftOffset);
-            A.setLayoutY(Leftside.getLayoutY());
-            leftOffset += offset;
+            LeftSide.getChildren().add(A);
         }else {
-            A.setLayoutX(Rightside.getLayoutX()+rightOffset);
-            A.setLayoutY(Rightside.getLayoutY());
-            rightOffset += offset;
+            RightSide.getChildren().add(A);
         }
-        boatOffset -= offset;
     }
     void moveToBoat(ImageView A,Boolean fromLeftToRightBank){
 
-        A.setLayoutX(Boat.getLayoutX()+boatOffset);
-        A.setLayoutY(Boat.getLayoutY()-Boat.getFitHeight()+10);
-        boatOffset += offset;
         if (fromLeftToRightBank){
-            leftOffset -= offset;
+            LeftSide.getChildren().remove(A);
         }else {
-            rightOffset -= offset;
+            RightSide.getChildren().remove(A);
         }
+        Boat.getChildren().add(A);
     }
 
 }

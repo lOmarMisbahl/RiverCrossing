@@ -16,7 +16,7 @@
                <children>
                   <ImageView fitHeight="356.0" fitWidth="295.0">
                      <image>
-                        <Image url="@src/GUI/Images/level.jpeg" />
+                        <Image url="@Images/level.jpeg" />
                      </image>
                   </ImageView>
                   <TextArea layoutX="48.0" layoutY="28.0" opacity="0.68" prefHeight="294.0" prefWidth="200.0" />
@@ -26,7 +26,7 @@
                <children>
                   <ImageView fitHeight="356.0" fitWidth="295.0">
                      <image>
-                        <Image url="@src/GUI/Images/level.jpeg" />
+                        <Image url="@Images/level.jpeg" />
                      </image>
                   </ImageView>
                   <TextArea layoutX="48.0" layoutY="31.0" opacity="0.68" prefHeight="294.0" prefWidth="200.0" />
@@ -36,7 +36,7 @@
       </SplitPane>
       <ImageView fitHeight="76.0" fitWidth="600.0">
          <image>
-            <Image url="@src/GUI/Images/level22.jpg" />
+            <Image url="@Images/level22.jpg" />
          </image>
       </ImageView>
       <Label layoutX="143.0" layoutY="-4.0" text="choose level" textFill="#f8d2d2">
