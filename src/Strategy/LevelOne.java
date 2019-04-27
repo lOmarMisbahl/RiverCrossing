@@ -46,9 +46,9 @@ public class LevelOne implements ICrossingStrategy {
     @Override
     public List<ICrosser> getInitialCrossers() {
         List<ICrosser> levelSceneRightBank = new ArrayList<ICrosser>();
-        Carnivorous wolf =new Carnivorous();
+        Carnivorous wolf =new Wolf();
         levelSceneRightBank.add(wolf);
-        Herbivorous sheep = new Herbivorous();
+        Herbivorous sheep = new Sheep();
         levelSceneRightBank.add(sheep);
         Farmer farmer = new Farmer();
         levelSceneRightBank.add(farmer);

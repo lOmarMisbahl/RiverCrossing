@@ -51,7 +51,7 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         gameEngine = GameEngine.getInstance();
         if (!init){
-            //gameEngine.newGame(LevelOne);
+            gameEngine.newGame( new LevelOne());
             init = true;
         }
         if (url.toString().contains("Game")) {
@@ -72,8 +72,8 @@ public class Controller implements Initializable {
                     moveToSide(IV.get(i),fromLeftToRightBank);
                     i++;
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println("Couldn't Load Image");
+                    //e.printStackTrace();
+                    System.out.println("Couldn't Load Image"+ i);
                 }
             }
 
@@ -169,6 +169,12 @@ public class Controller implements Initializable {
             RightSide.getChildren().remove(A);
         }
         Boat.getChildren().add(A);
+    }
+    @FXML
+    void moveBoat(MouseEvent event) {
+
+
+        
     }
 
 }

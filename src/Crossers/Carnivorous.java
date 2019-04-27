@@ -1,13 +1,10 @@
-public abstract class Carnivorous extends Crosser {
-
-<<<<<<< HEAD
-=======
+package Crossers;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Carnivorous extends Animal{
+public class Carnivorous extends Crosser{
     @Override
     public ArrayList<BufferedImage> getImages() throws Exception{
         ArrayList<BufferedImage> images = new ArrayList<>();
@@ -16,5 +13,4 @@ public class Carnivorous extends Animal{
         }
         return images;
     }
->>>>>>> 7bbae6c4f68a3cc83a19edb4e5d7176e9dacaf85
 }

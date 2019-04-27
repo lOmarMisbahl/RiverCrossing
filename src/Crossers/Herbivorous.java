@@ -1,16 +1,12 @@
-<<<<<<< HEAD
-public abstract class Herbivorous extends Crosser {
-=======
 package Crossers;
 
-import Crossers.Animal;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Herbivorous extends Animal {
+public class Herbivorous extends Crosser {
 
     @Override
     public ArrayList<BufferedImage> getImages() throws Exception{
@@ -21,5 +17,4 @@ public class Herbivorous extends Animal {
         return images;
     }
 
->>>>>>> 7bbae6c4f68a3cc83a19edb4e5d7176e9dacaf85
 }

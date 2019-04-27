@@ -38,5 +38,10 @@
             </ImageView>
          </children>
       </VBox>
+      <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="496.0" layoutY="321.0" onMouseClicked="#moveBoat" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/go.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

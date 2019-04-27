@@ -1,3 +1,5 @@
+package Crossers;
+import Crossers.ICrosser;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.WritableImage;
 
@@ -70,6 +72,8 @@ public abstract class Crosser implements ICrosser {
     public String getLabelToBeShown() {
         return this.Label;
     }
+
+
     public ArrayList<WritableImage> ToNormalImages() throws Exception{
         ArrayList<WritableImage> Images = new ArrayList<>();
         for (int i =0 ; i < getImages().size(); i++) {
