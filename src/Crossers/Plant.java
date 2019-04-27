@@ -5,7 +5,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Plant extends Crosser {
-
+    public Plant(){
+        this.setEatingRank(1);
+    }
     @Override
     public ArrayList<BufferedImage> getImages() throws Exception{
         ArrayList<BufferedImage> images = new ArrayList<>();

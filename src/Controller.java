@@ -173,8 +173,19 @@ public class Controller implements Initializable {
     @FXML
     void moveBoat(MouseEvent event) {
 
+        //System.out.println(gameEngine.canMove(gameEngine.getBoatRiders(),fromLeftToRightBank));
+        if(gameEngine.canMove(gameEngine.getBoatRiders(),fromLeftToRightBank)) {
+            if (fromLeftToRightBank) {
+                BoatGroup.setLayoutX(RightSide.getLayoutX() + 10);
+                BoatGroup.setLayoutY(RightSide.getLayoutY() + BoatGroup.getHeight());
+                fromLeftToRightBank = false;
+            } else {
+                BoatGroup.setLayoutX(LeftSide.getLayoutX() + 10);
+                BoatGroup.setLayoutY(LeftSide.getLayoutY() + BoatGroup.getHeight() - 20);
+                fromLeftToRightBank = true;
 
-        
+            }
+        }
     }
 
 }

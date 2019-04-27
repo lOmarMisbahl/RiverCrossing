@@ -8,6 +8,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Wolf extends Carnivorous {
+    public Wolf(){
+        this.setEatingRank(3);
+
+    }
     @Override
     public ArrayList<BufferedImage> getImages() throws Exception{
         ArrayList<BufferedImage> images = new ArrayList<>();

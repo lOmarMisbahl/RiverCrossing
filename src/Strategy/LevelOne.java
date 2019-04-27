@@ -1,19 +1,24 @@
 package Strategy;
 import Crossers.*;
-import Strategy.ICrossingStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LevelOne implements ICrossingStrategy {
     @Override
-    public boolean isValid(List<ICrosser> rightBankCrossers, List<ICrosser> leftBankCrossers, List<ICrosser> boatRiders) {
+    public boolean isValid(List<ICrosser> rightBankCrossers,
+                           List<ICrosser> leftBankCrossers, List<ICrosser>
+                                   boatRiders) {
+        System.out.println("Im here in level one");
         boolean boatCanSail = false;
-        for(int i=0;i<boatRiders.size();i++)
-        {  ICrosser x = boatRiders.get(i);
+        for(int i=0;i<boatRiders.size();i++) {
+            ICrosser x = boatRiders.get(i);
             if ( x instanceof Farmer)
-            {boatCanSail = true; }
+            {
+                boatCanSail = true;
+            }
         }
+
         boolean rightBankError=false;
         boolean leftBankError=false;
         for (int i=0;(i<rightBankCrossers.size()-1);i++) {
@@ -41,6 +46,7 @@ public class LevelOne implements ICrossingStrategy {
         if(boatCanSail && !leftBankError &&  !rightBankError)
             return true;
         else  return false;
+
     }
 
     @Override

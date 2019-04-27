@@ -6,6 +6,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Farmer extends Crosser {
+    public Farmer(){
+        this.setEatingRank(4);
+
+    }
 
     @Override
     public ArrayList<BufferedImage> getImages() throws Exception{
