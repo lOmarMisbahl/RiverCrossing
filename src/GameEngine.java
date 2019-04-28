@@ -25,6 +25,7 @@ public class GameEngine implements IGameController{
     public void newGame(ICrossingStrategy gameStrategy) {
        this.gameStrategy = gameStrategy;
        leftBank.addAll(gameStrategy.getInitialCrossers());
+        System.out.println("size of left"+leftBank.size());
         boatPosition = "L";
 
     }
@@ -69,6 +70,11 @@ public class GameEngine implements IGameController{
 
     @Override
     public boolean canMove(List<ICrosser> crossers, boolean fromLeftToRightBank) {
+        System.out.println("Game Engine");
+        System.out.println("Left Side : " + leftBank.size());
+        System.out.println("Boat : " + boatRiders.size());
+        System.out.println("Right Side : " + rightBank.size());
+
 
         LevelOne x = new LevelOne();
         return x.isValid(rightBank,leftBank,boatRiders);
@@ -128,9 +134,9 @@ public class GameEngine implements IGameController{
         }
         A.setOnBoat(false);
     }
-    public boolean moveToBoat(ICrosser A){
+    public boolean moveToBoat(ICrosser A,boolean fromLeftToRightBank ){
         if (boatRiders.size()<2){
-            if (isBoatOnTheLeftBank()){
+            if (fromLeftToRightBank){
                 leftBank.remove(A);
 
             }else {

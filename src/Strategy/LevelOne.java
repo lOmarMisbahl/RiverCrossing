@@ -9,7 +9,10 @@ public class LevelOne implements ICrossingStrategy {
     public boolean isValid(List<ICrosser> rightBankCrossers,
                            List<ICrosser> leftBankCrossers, List<ICrosser>
                                    boatRiders) {
-        System.out.println("Im here in level one");
+        System.out.println("Level One");
+        System.out.println("Left Side : " + leftBankCrossers.size());
+        System.out.println("Boat : " + boatRiders.size());
+        System.out.println("Right Side : " + rightBankCrossers.size());
         boolean boatCanSail = false;
         for(int i=0;i<boatRiders.size();i++) {
             ICrosser x = boatRiders.get(i);

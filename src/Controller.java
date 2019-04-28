@@ -48,7 +48,6 @@ public class Controller implements Initializable {
         }
         if (url.toString().contains("Game")) {
 
-            gameEngine.newGame(new Test());
             IV.add(Crosser1);
             IV.add(Crosser2);
             IV.add(Crosser3);
@@ -139,7 +138,7 @@ public class Controller implements Initializable {
                 gameEngine.getOffBoat(myCrosser,fromLeftToRightBank);
 
         }else {
-            if (gameEngine.moveToBoat(myCrosser)){
+            if (gameEngine.moveToBoat(myCrosser,fromLeftToRightBank)){
                 moveToBoat(myImageView,fromLeftToRightBank);
 
             }
