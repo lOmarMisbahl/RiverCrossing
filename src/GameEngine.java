@@ -1,8 +1,6 @@
-import Crossers.Crosser;
 import Crossers.Farmer;
 import Crossers.ICrosser;
 import Strategy.ICrossingStrategy;
-import Strategy.LevelOne;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-
+import Crossers.ICrosser;
 import Strategy.LevelOne;
 import Strategy.Test;
 import javafx.embed.swing.SwingFXUtils;
@@ -8,26 +8,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.image.BufferedImage;
-import java.awt.print.Book;
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
-import Crossers.*;
-
-import javax.imageio.ImageIO;
 
 public class Controller implements Initializable {
 
@@ -156,6 +148,8 @@ public class Controller implements Initializable {
     }
     void moveToSide(ImageView A,Boolean fromLeftToRightBank){
         if (fromLeftToRightBank){
+            FilesParser parser = new FilesParser();
+            parser.WriteSaveGame();
             LeftSide.getChildren().add(A);
         }else {
             RightSide.getChildren().add(A);
@@ -164,6 +158,8 @@ public class Controller implements Initializable {
     void moveToBoat(ImageView A,Boolean fromLeftToRightBank){
 
         if (fromLeftToRightBank){
+            FilesParser parser = new FilesParser();
+            parser.WriteSaveGame();
             LeftSide.getChildren().remove(A);
         }else {
             RightSide.getChildren().remove(A);
