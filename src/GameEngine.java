@@ -70,59 +70,9 @@ public class GameEngine implements IGameController{
 
     @Override
     public boolean canMove(List<ICrosser> crossers, boolean fromLeftToRightBank) {
-        boolean boatCanSail = false;
-        for(int i=0;i<boatRiders.size();i++) {
-            ICrosser x = boatRiders.get(i);
-            if ( x instanceof Farmer)
-            {
-                boatCanSail = true;
 
-            }
-        }
-
-        boolean rightBankError=false;
-        boolean leftBankError=false;
-        for (int i=0;(i<rightBank.size()-1);i++) {
-            for (int j=1;j<rightBank.size();j++) {
-                ICrosser y = rightBank.get(i);
-                ICrosser z = rightBank.get(j);
-                if(Math.abs(y.getEatingRank()-z.getEatingRank())==1) {
-                    rightBankError = true;
-                } else {
-                    rightBankError = false;
-                    break;
-                }
-            }
-            if (!rightBankError){
-                break;
-            }
-        }
-
-        for (int i=0;(i<leftBank.size()-1);i++) {
-            for (int j=1;j<leftBank.size();j++) {
-                ICrosser y = leftBank.get(i);
-                ICrosser z = leftBank.get(j);
-                if(Math.abs(y.getEatingRank()-z.getEatingRank())!=1) {
-                    leftBankError = true;
-                    System.out.println("it's true");
-                    break;
-                }else{
-                    leftBankError = false;
-
-                }
-            }
-            if (leftBankError){
-                System.out.println("its still true");
-                break;
-            }
-        }
-        System.out.println("Farmer is " + boatCanSail + "LeftBank" + leftBankError);
-        if(boatCanSail && leftBankError &&  rightBankError)
-            return true;
-        else
-            return false;
-
-        //return this.gameStrategy.isValid(rightBank,leftBank,crossers);
+        LevelOne x = new LevelOne();
+        return x.isValid(rightBank,leftBank,boatRiders);
     }
 
     @Override
