@@ -122,7 +122,7 @@ public class FilesParser {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File("C:\\Users\\Omar\\Desktop\\RiverCrossing\\Saves.xml"));
+            StreamResult streamResult = new StreamResult(new File("Saves.xml"));
 
             // If you use
             // StreamResult result = new StreamResult(System.out);
