@@ -1,5 +1,6 @@
 import Crossers.ICrosser;
 import Strategy.LevelOne;
+import Strategy.LevelTwo;
 import Strategy.Test;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -43,7 +44,7 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         gameEngine = GameEngine.getInstance();
         if (!init){
-            gameEngine.newGame( new LevelOne());
+            gameEngine.newGame( new LevelTwo());
             init = true;
         }
         if (url.toString().contains("Game")) {

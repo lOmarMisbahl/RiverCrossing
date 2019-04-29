@@ -2,6 +2,7 @@ import Crossers.Farmer;
 import Crossers.ICrosser;
 import Strategy.ICrossingStrategy;
 import Strategy.LevelOne;
+import Strategy.LevelTwo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class GameEngine implements IGameController{
     @Override
     public void newGame(ICrossingStrategy gameStrategy) {
        this.gameStrategy = gameStrategy;
+
        leftBank.addAll(gameStrategy.getInitialCrossers());
         System.out.println("size of left"+leftBank.size());
         boatPosition = "L";
@@ -75,9 +77,17 @@ public class GameEngine implements IGameController{
         System.out.println("Boat : " + boatRiders.size());
         System.out.println("Right Side : " + rightBank.size());
 
+        try{
+            LevelOne x = (LevelOne) gameStrategy;//
+            return x.isValid(rightBank,leftBank,boatRiders);
 
-        LevelOne x = new LevelOne();
-        return x.isValid(rightBank,leftBank,boatRiders);
+
+        }catch (Exception e){
+            LevelTwo x = (LevelTwo) gameStrategy;//
+            return x.isValid(rightBank,leftBank,boatRiders);
+
+
+        }
     }
 
     @Override

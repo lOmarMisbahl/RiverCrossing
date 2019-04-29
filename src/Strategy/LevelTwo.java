@@ -8,6 +8,7 @@ import java.util.List;
 public class LevelTwo implements ICrossingStrategy {
     @Override
     public boolean isValid(List<ICrosser> rightBankICrossers, List<ICrosser> leftBankICrossers, List<ICrosser> boatRiders) {
+        System.out.println("Level Two");
         boolean verifieWeight= false;
         boolean verifieFarmer= false;
         float BoatWeight=0;
@@ -32,9 +33,9 @@ public class LevelTwo implements ICrossingStrategy {
     @Override
     public List<ICrosser> getInitialCrossers(){
         List<ICrosser> levelSceneRightBank = new ArrayList<ICrosser>();
-        Carnivorous wolf =new Carnivorous();
+        Carnivorous wolf =new Wolf();
         levelSceneRightBank.add(wolf);
-        Herbivorous sheep = new Herbivorous();
+        Herbivorous sheep = new Sheep();
         levelSceneRightBank.add(sheep);
         Farmer farmer = new Farmer();
         levelSceneRightBank.add(farmer);
