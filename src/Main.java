@@ -5,15 +5,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-          FilesParser parser = new FilesParser();
-          parser.ReadSaveGame();
+//          FilesParser parser = new FilesParser();
+//          parser.ReadSaveGame();
+//          GameEngine gameEngine = GameEngine.getInstance();
 //        GameEngine gameEngine = GameEngine.getInstance();
 //        Parent root = FXMLLoader.load(getClass().getResource("GUI/Game.fxml"));
 //        Scene scene = new Scene(root);//, 500, 500);
 //        //primaryStage.setTitle("Hello");
 //        primaryStage.setScene(scene);
 //        primaryStage.show();
-    }
 //          *To convert Buffered Image to Image then view it in GUI*
 //        Image image = SwingFXUtils.toFXImage(bufferedimage, null);
 //        GridPane pane = new GridPane();

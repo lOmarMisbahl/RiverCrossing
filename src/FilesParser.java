@@ -1,4 +1,7 @@
-import Crossers.*;
+import Crossers.Farmer;
+import Crossers.Plant;
+import Crossers.Sheep;
+import Crossers.Wolf;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -19,12 +22,12 @@ public class FilesParser {
     GameEngine Save;
 
     public void ReadSaveGame() {
-        try {
             try {
                 Farmer farmer = new Farmer();
                 Wolf Wolf = new Wolf();
                 Sheep Sheep = new Sheep();
                 Plant Plant = new Plant();
+                int temp;
                 Save = GameEngine.getInstance();
                 File Saves = new File("Saves.xml");
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -36,65 +39,55 @@ public class FilesParser {
                 NodeList RightBank = doc.getElementsByTagName("RightBank");
                 NodeList OnBoat = doc.getElementsByTagName("OnBoat");
                 NodeList Sails = doc.getElementsByTagName("Save");
-
-                Node LeftBankN = LeftBank.item(0);
-                System.out.println(LeftBank.item(0).getChildNodes().item(0).getNodeName());
-                Element eElementL = (Element) LeftBankN;
-                try {
-                    if (eElementL.getElementsByTagName("Farmer").item(0).getTextContent().equals("1"))
-                        Save.leftBank.add(farmer);
-                    if (eElementL.getElementsByTagName("Wolf").item(0).getTextContent().equals("1"))
-                        Save.leftBank.add(Wolf);
-                    if (eElementL.getElementsByTagName("Sheep").item(0).getTextContent().equals("1"))
-                        Save.leftBank.add(Sheep);
-                    if (eElementL.getElementsByTagName("Plant").item(0).getTextContent().equals("1"))
-                        Save.leftBank.add(Plant);
-                } catch (NullPointerException N) {
-                    N.printStackTrace();
-                }
-
                 Node RightBankN = RightBank.item(0);
-                Element eElementR = (Element) RightBankN;
-                try {
-                    if (eElementR.getElementsByTagName("Farmer").item(0).getTextContent().equals("1"))
-                        Save.rightBank.add(farmer);
-                    if (eElementR.getElementsByTagName("Wolf").item(0).getTextContent().equals("1"))
-                        Save.rightBank.add(Wolf);
-                    if (eElementR.getElementsByTagName("Sheep").item(0).getTextContent().equals("1"))
-                        Save.rightBank.add(Sheep);
-                    if (eElementR.getElementsByTagName("Plant").item(0).getTextContent().equals("1"))
-                        Save.rightBank.add(Plant);
-                } catch (NullPointerException N) {
-                    N.printStackTrace();
+                Node LeftBankN = LeftBank.item(0);
+                Node OnBoatN = OnBoat.item(0);
+                Node SailsN = Sails.item(0);
+
+                for (temp = 0; temp < LeftBankN.getChildNodes().getLength(); temp++) {
+
+
+                    if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Wolf"))
+                        Save.leftBank.add(Wolf);
+                    if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Farmer"))
+                        Save.leftBank.add(farmer);
+                    if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Sheep"))
+                        Save.leftBank.add(Sheep);
+                    if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Plant"))
+                        Save.leftBank.add(Plant);
                 }
 
-                Node OnBoatN = OnBoat.item(0);
-                Element eElementO = (Element) OnBoatN;
-                try {
-                    if (eElementO.getElementsByTagName("Farmer").item(0).getTextContent().equals("1"))
-                        Save.boatRiders.add(farmer);
-                    if (eElementO.getElementsByTagName("Wolf").item(0).getTextContent().equals("1"))
+
+                for (temp = 0; temp < RightBankN.getChildNodes().getLength(); temp++) {
+
+
+                    if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Wolf"))
+                        Save.rightBank.add(Wolf);
+                    if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Farmer"))
+                        Save.rightBank.add(farmer);
+                    if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Sheep"))
+                        Save.rightBank.add(Sheep);
+                    if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Plant"))
+                        Save.rightBank.add(Plant);
+                }
+
+                for (temp = 0; temp < OnBoatN.getChildNodes().getLength(); temp++) {
+
+
+                    if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Wolf"))
                         Save.boatRiders.add(Wolf);
-                    if (eElementO.getElementsByTagName("Sheep").item(0).getTextContent().equals("1"))
+                    if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Farmer"))
+                        Save.boatRiders.add(farmer);
+                    if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Sheep"))
                         Save.boatRiders.add(Sheep);
-                    if (eElementO.getElementsByTagName("Plant").item(0).getTextContent().equals("1"))
+                    if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Plant"))
                         Save.boatRiders.add(Plant);
-                } catch (NullPointerException N) {
-                    N.printStackTrace();
                 }
-                Node SailN = Sails.item(0);
-                Element eElementS = (Element) SailN;
-                try {
-                    Save.sails = Integer.parseInt(eElementS.getElementsByTagName("Sails").item(0).getTextContent());
-                } catch (NullPointerException N) {
-                    N.printStackTrace();
-                }
+
+                Save.sails=Integer.parseInt(SailsN.getLastChild().getTextContent());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }catch (NullPointerException N){
-            N.printStackTrace();
-        }
     }
 
     public void WriteSaveGame() {
