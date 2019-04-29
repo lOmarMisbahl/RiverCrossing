@@ -1,9 +1,8 @@
-import Crossers.Farmer;
-import Crossers.Plant;
-import Crossers.Sheep;
-import Crossers.Wolf;
+import Crossers.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,6 +19,82 @@ public class FilesParser {
     GameEngine Save;
 
     public void ReadSaveGame() {
+        try {
+            try {
+                Farmer farmer = new Farmer();
+                Wolf Wolf = new Wolf();
+                Sheep Sheep = new Sheep();
+                Plant Plant = new Plant();
+                Save = GameEngine.getInstance();
+                File Saves = new File("Saves.xml");
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                //doc is an object that we use to access the xml file i guess
+                Document doc = dBuilder.parse(Saves);
+                doc.getDocumentElement().normalize();
+                NodeList LeftBank = doc.getElementsByTagName("LeftBank");
+                NodeList RightBank = doc.getElementsByTagName("RightBank");
+                NodeList OnBoat = doc.getElementsByTagName("OnBoat");
+                NodeList Sails = doc.getElementsByTagName("Save");
+
+                Node LeftBankN = LeftBank.item(0);
+                System.out.println(LeftBank.item(0).getChildNodes().item(0).getNodeName());
+                Element eElementL = (Element) LeftBankN;
+                try {
+                    if (eElementL.getElementsByTagName("Farmer").item(0).getTextContent().equals("1"))
+                        Save.leftBank.add(farmer);
+                    if (eElementL.getElementsByTagName("Wolf").item(0).getTextContent().equals("1"))
+                        Save.leftBank.add(Wolf);
+                    if (eElementL.getElementsByTagName("Sheep").item(0).getTextContent().equals("1"))
+                        Save.leftBank.add(Sheep);
+                    if (eElementL.getElementsByTagName("Plant").item(0).getTextContent().equals("1"))
+                        Save.leftBank.add(Plant);
+                } catch (NullPointerException N) {
+                    N.printStackTrace();
+                }
+
+                Node RightBankN = RightBank.item(0);
+                Element eElementR = (Element) RightBankN;
+                try {
+                    if (eElementR.getElementsByTagName("Farmer").item(0).getTextContent().equals("1"))
+                        Save.rightBank.add(farmer);
+                    if (eElementR.getElementsByTagName("Wolf").item(0).getTextContent().equals("1"))
+                        Save.rightBank.add(Wolf);
+                    if (eElementR.getElementsByTagName("Sheep").item(0).getTextContent().equals("1"))
+                        Save.rightBank.add(Sheep);
+                    if (eElementR.getElementsByTagName("Plant").item(0).getTextContent().equals("1"))
+                        Save.rightBank.add(Plant);
+                } catch (NullPointerException N) {
+                    N.printStackTrace();
+                }
+
+                Node OnBoatN = OnBoat.item(0);
+                Element eElementO = (Element) OnBoatN;
+                try {
+                    if (eElementO.getElementsByTagName("Farmer").item(0).getTextContent().equals("1"))
+                        Save.boatRiders.add(farmer);
+                    if (eElementO.getElementsByTagName("Wolf").item(0).getTextContent().equals("1"))
+                        Save.boatRiders.add(Wolf);
+                    if (eElementO.getElementsByTagName("Sheep").item(0).getTextContent().equals("1"))
+                        Save.boatRiders.add(Sheep);
+                    if (eElementO.getElementsByTagName("Plant").item(0).getTextContent().equals("1"))
+                        Save.boatRiders.add(Plant);
+                } catch (NullPointerException N) {
+                    N.printStackTrace();
+                }
+                Node SailN = Sails.item(0);
+                Element eElementS = (Element) SailN;
+                try {
+                    Save.sails = Integer.parseInt(eElementS.getElementsByTagName("Sails").item(0).getTextContent());
+                } catch (NullPointerException N) {
+                    N.printStackTrace();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }catch (NullPointerException N){
+            N.printStackTrace();
+        }
     }
 
     public void WriteSaveGame() {

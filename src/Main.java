@@ -1,19 +1,18 @@
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        GameEngine gameEngine = GameEngine.getInstance();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/Game.fxml"));
-        Scene scene = new Scene(root);//, 500, 500);
-        //primaryStage.setTitle("Hello");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+          FilesParser parser = new FilesParser();
+          parser.ReadSaveGame();
+//        GameEngine gameEngine = GameEngine.getInstance();
+//        Parent root = FXMLLoader.load(getClass().getResource("GUI/Game.fxml"));
+//        Scene scene = new Scene(root);//, 500, 500);
+//        //primaryStage.setTitle("Hello");
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
     }
 //          *To convert Buffered Image to Image then view it in GUI*
 //        Image image = SwingFXUtils.toFXImage(bufferedimage, null);
