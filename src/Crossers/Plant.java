@@ -7,6 +7,8 @@ import java.util.ArrayList;
 public class Plant extends Crosser {
     public Plant(){
         this.setEatingRank(1);
+        setLabelToBeShown(this.getClass().getName());
+
     }
     @Override
     public ArrayList<BufferedImage> getImages() throws Exception{

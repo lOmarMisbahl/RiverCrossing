@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class Wolf extends Carnivorous {
     public Wolf(){
+        setLabelToBeShown(this.getClass().getName());
         this.setEatingRank(3);
 
     }
