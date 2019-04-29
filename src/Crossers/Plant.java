@@ -11,7 +11,7 @@ public class Plant extends Crosser {
     @Override
     public ArrayList<BufferedImage> getImages() throws Exception{
         ArrayList<BufferedImage> images = new ArrayList<>();
-        images.add(ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\GUI\\Sprites\\Cabbage.png")));
+        images.add(ImageIO.read(new File(System.getProperty("user.dir")+"/src/GUI/Sprites/Cabbage.png")));
         /*for (int i = 0; i < 3; i++) {
             images.add(ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\GUI\\Sprites\\plant"+i+".png")));
         }*/

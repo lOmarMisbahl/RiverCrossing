@@ -15,8 +15,8 @@ public class Wolf extends Carnivorous {
     @Override
     public ArrayList<BufferedImage> getImages() throws Exception{
         ArrayList<BufferedImage> images = new ArrayList<>();
-        images.add(ImageIO.read(new File(System.getProperty("user.dir")+ "\\src\\GUI\\Sprites\\WolfRight.png")));
-        images.add(ImageIO.read(new File(System.getProperty("user.dir")+ "\\src\\GUI\\Sprites\\WolfLeft.png")));
+        images.add(ImageIO.read(new File(System.getProperty("user.dir")+ "/src/GUI/Sprites/WolfRight.png")));
+        images.add(ImageIO.read(new File(System.getProperty("user.dir")+ "/src/GUI/Sprites/WolfLeft.png")));
         return images;
     }
 
