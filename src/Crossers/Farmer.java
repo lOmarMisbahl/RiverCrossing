@@ -9,6 +9,7 @@ public class Farmer extends Crosser {
     public Farmer(){
         this.setEatingRank(4);
 
+
     }
 
     @Override
@@ -18,5 +19,6 @@ public class Farmer extends Crosser {
         images.add(ImageIO.read(new File(System.getProperty("user.dir")+ "/src/GUI/Sprites/FarmerLeft.png")));
         return images;
     }
+
 
 }
