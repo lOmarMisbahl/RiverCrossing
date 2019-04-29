@@ -59,6 +59,6 @@ public class LevelTwo implements ICrossingStrategy {
 
     @Override
     public String[] getInstructions() {
-        String[] instructionTwo = new String[]{" Four farmers with their sheeps  want to cross the river their weights are 90,80,60 and 40kg and the max weight on boat is 100kg, how can they cross?"};
+        String[] instructionTwo = new String[]{" Four  farmers with their sheeps  want to cross the river their weights are 90,80,60 and 40kg and the max weight on boat is 100kg, how can they cross?"};
         return instructionTwo;}
 }
