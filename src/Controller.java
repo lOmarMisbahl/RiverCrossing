@@ -144,9 +144,14 @@ public class Controller implements Initializable {
                 gameEngine.getOffBoat(myCrosser,fromLeftToRightBank);
 
         }else {
-            if (gameEngine.moveToBoat(myCrosser,fromLeftToRightBank)){
-                moveToBoat(myImageView,fromLeftToRightBank);
-
+            if (gameEngine.leftBank.contains(myCrosser)&&fromLeftToRightBank){
+                if (gameEngine.moveToBoat(myCrosser,fromLeftToRightBank)) {
+                    moveToBoat(myImageView, fromLeftToRightBank);
+                }
+            }else if( gameEngine.rightBank.contains(myCrosser)&&!fromLeftToRightBank ) {
+                if (gameEngine.moveToBoat(myCrosser,fromLeftToRightBank)) {
+                    moveToBoat(myImageView, fromLeftToRightBank);
+                }
             }
         }
 
