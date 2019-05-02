@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Farmer extends Crosser {
     public Farmer(){
+        setLabelToBeShown(this.getClass().getName());
         this.setEatingRank(4);
 
 

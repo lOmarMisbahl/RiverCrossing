@@ -4,6 +4,8 @@ import Crossers.Sheep;
 import Crossers.Wolf;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,6 +22,72 @@ public class FilesParser {
     GameEngine Save;
 
     public void ReadSaveGame() {
+            try {
+                Farmer farmer = new Farmer();
+                Wolf Wolf = new Wolf();
+                Sheep Sheep = new Sheep();
+                Plant Plant = new Plant();
+                int temp;
+                Save = GameEngine.getInstance();
+                File Saves = new File("Saves.xml");
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                //doc is an object that we use to access the xml file i guess
+                Document doc = dBuilder.parse(Saves);
+                doc.getDocumentElement().normalize();
+                NodeList LeftBank = doc.getElementsByTagName("LeftBank");
+                NodeList RightBank = doc.getElementsByTagName("RightBank");
+                NodeList OnBoat = doc.getElementsByTagName("OnBoat");
+                NodeList Sails = doc.getElementsByTagName("Save");
+                Node RightBankN = RightBank.item(0);
+                Node LeftBankN = LeftBank.item(0);
+                Node OnBoatN = OnBoat.item(0);
+                Node SailsN = Sails.item(0);
+
+                for (temp = 0; temp < LeftBankN.getChildNodes().getLength(); temp++) {
+
+
+                    if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Wolf"))
+                        Save.leftBank.add(Wolf);
+                    if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Farmer"))
+                        Save.leftBank.add(farmer);
+                    if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Sheep"))
+                        Save.leftBank.add(Sheep);
+                    if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Plant"))
+                        Save.leftBank.add(Plant);
+                }
+
+
+                for (temp = 0; temp < RightBankN.getChildNodes().getLength(); temp++) {
+
+
+                    if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Wolf"))
+                        Save.rightBank.add(Wolf);
+                    if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Farmer"))
+                        Save.rightBank.add(farmer);
+                    if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Sheep"))
+                        Save.rightBank.add(Sheep);
+                    if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Plant"))
+                        Save.rightBank.add(Plant);
+                }
+
+                for (temp = 0; temp < OnBoatN.getChildNodes().getLength(); temp++) {
+
+
+                    if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Wolf"))
+                        Save.boatRiders.add(Wolf);
+                    if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Farmer"))
+                        Save.boatRiders.add(farmer);
+                    if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Sheep"))
+                        Save.boatRiders.add(Sheep);
+                    if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Plant"))
+                        Save.boatRiders.add(Plant);
+                }
+
+                Save.sails=Integer.parseInt(SailsN.getLastChild().getTextContent());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     public void WriteSaveGame() {
@@ -131,7 +199,6 @@ public class FilesParser {
 
             transformer.transform(domSource, streamResult);
 
-            System.out.println("Done creating XML File");
 
         } catch (ParserConfigurationException pce) {
             pce.printStackTrace();
