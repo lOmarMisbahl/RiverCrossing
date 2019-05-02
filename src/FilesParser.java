@@ -121,6 +121,9 @@ public class FilesParser {
 
 
             for (temp = 0; temp < Save.leftBank.size(); temp++) {
+                System.out.println("left"+Save.leftBank.size());
+                System.out.println("boat"+Save.boatRiders.size());
+                System.out.println("right"+Save.rightBank.size());
 
                 if (Save.leftBank.get(temp) instanceof Farmer) {
                     Element Farmer = document.createElement("Farmer");
@@ -141,7 +144,7 @@ public class FilesParser {
                     Element SheepWeight = document.createElement("Weight");
                     SheepWeight.appendChild(document.createTextNode(Double.toString(Save.leftBank.get(temp).getWeight())));
                     Sheep.appendChild(SheepWeight);
-                    OnBoat.appendChild(Sheep);
+                    Left.appendChild(Sheep);
                 } else if (Save.leftBank.get(temp) instanceof Plant) {
                     Element Plant = document.createElement("Plant");
                     Plant.appendChild(document.createTextNode("1"));
