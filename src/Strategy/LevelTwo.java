@@ -54,6 +54,9 @@ public class LevelTwo implements ICrossingStrategy {
         Farmer farmer4 = new Farmer();
         farmer4.setWeight(40);
         levelSceneRightBank.add(farmer4);
+        Sheep sheeplvltwo =new Sheep();
+        sheeplvltwo.setWeight(20);
+        levelSceneRightBank.add(sheeplvltwo);
         return levelSceneRightBank;
     }
 
