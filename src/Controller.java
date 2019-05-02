@@ -1,7 +1,5 @@
 import Crossers.ICrosser;
-import Strategy.LevelOne;
 import Strategy.LevelThree;
-import Strategy.LevelTwo;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -161,7 +159,6 @@ public class Controller implements Initializable {
     void moveToBoat(ImageView A,Boolean fromLeftToRightBank){
 
         if (fromLeftToRightBank){
-            gameEngine.Command(save);
             LeftSide.getChildren().remove(A);
         }else {
             RightSide.getChildren().remove(A);
@@ -184,6 +181,7 @@ public class Controller implements Initializable {
 
             }
         }
+        gameEngine.Command(save);
     }
     @FXML
     void loadLevelOne(MouseEvent event) {
