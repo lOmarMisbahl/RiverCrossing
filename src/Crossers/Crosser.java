@@ -1,19 +1,18 @@
 package Crossers;
-import Crossers.ICrosser;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.WritableImage;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public abstract class Crosser implements ICrosser {
+public  class Crosser implements ICrosser {
     private double Weight;
     private String Label;
     private int EatingRank;
     private boolean canSail;
     private boolean onBoat = false;
     private ArrayList<BufferedImage> Images;
+
 
     public boolean isOnBoat(){
         return onBoat;
