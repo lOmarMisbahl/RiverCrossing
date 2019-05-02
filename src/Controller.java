@@ -47,7 +47,7 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         gameEngine = GameEngine.getInstance();
         if (!init){
-            gameEngine.newGame( new LevelTwo());
+            //gameEngine.newGame( new LevelThree());
             System.out.println(gameEngine.getLevelNumber());
             init = true;
         }
@@ -96,14 +96,15 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void start(ActionEvent event) {
+    void loadLevels(ActionEvent event) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Game.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/levels.fxml"));
             Scene scene = new Scene(loader.load());
             ((Stage)((Node)event.getSource()).getScene().getWindow()).setScene(scene);
         }catch (Exception e){
-            System.out.println("Error Loading Game");
+            System.out.println("Error Loading Level");
+            e.printStackTrace();
         }
         int i = 0;
         /*
@@ -184,5 +185,31 @@ public class Controller implements Initializable {
             }
         }
     }
+    @FXML
+    void loadLevelOne(MouseEvent event) {
+        gameEngine.newGame(new LevelOne());
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Game.fxml"));
+            Scene scene = new Scene(loader.load());
+            ((Stage)((Node)event.getSource()).getScene().getWindow()).setScene(scene);
+        }catch (Exception e){
+            System.out.println("Error Loading Game");
+        }
+    }
+
+    @FXML
+    void loadLevelTwo(MouseEvent event) {
+
+        gameEngine.newGame(new LevelTwo());
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Game.fxml"));
+            Scene scene = new Scene(loader.load());
+            ((Stage)((Node)event.getSource()).getScene().getWindow()).setScene(scene);
+        }catch (Exception e){
+            System.out.println("Error Loading Game");
+        }
+
+    }
+
 
 }
