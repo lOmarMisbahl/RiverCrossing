@@ -47,7 +47,7 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         gameEngine = GameEngine.getInstance();
         if (!init){
-            gameEngine.newGame( new LevelThree());
+            gameEngine.newGame( new LevelTwo());
             System.out.println(gameEngine.getLevelNumber());
             init = true;
         }

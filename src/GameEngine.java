@@ -1,7 +1,7 @@
+import Crossers.Farmer;
 import Crossers.ICrosser;
 import Strategy.ICrossingStrategy;
 import Strategy.LevelOne;
-import Strategy.LevelThree;
 import Strategy.LevelTwo;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class GameEngine implements IGameController{
     List<ICrosser> leftBank = new ArrayList<ICrosser>();
     List<ICrosser> boatRiders = new ArrayList<ICrosser>();
     String boatPosition = "L";
-    int sails;
+    int sails = 0;
     public static GameEngine getInstance() {
         return ourInstance;
     }
@@ -29,6 +29,7 @@ public class GameEngine implements IGameController{
        leftBank.addAll(gameStrategy.getInitialCrossers());
         System.out.println("size of left"+leftBank.size());
         boatPosition = "L";
+
 
     }
 
@@ -83,13 +84,8 @@ public class GameEngine implements IGameController{
 
 
         }catch (Exception e){
-            try {
-                LevelTwo x = (LevelTwo) gameStrategy;//
-                return x.isValid(rightBank,leftBank,boatRiders);
-            }catch (Exception ee){
-                LevelThree x = (LevelThree) gameStrategy;//
-                return x.isValid(rightBank,leftBank,boatRiders);
-            }
+            LevelTwo x = (LevelTwo) gameStrategy;//
+            return x.isValid(rightBank,leftBank,boatRiders);
 
 
         }
@@ -163,17 +159,6 @@ public class GameEngine implements IGameController{
         }else {
             System.out.println("No more room on boat");
             return false;
-        }
-    }
-
-    public void Command(Command Order){
-        Order.Execute();
-    }
-    public int getLevelNumber(){
-        if (gameStrategy instanceof LevelOne ){
-            return 1;
-        }else{
-            return 2;
         }
     }
 }
