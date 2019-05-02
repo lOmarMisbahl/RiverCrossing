@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Sheep extends Herbivorous {
     public Sheep(){
         this.setEatingRank(2);
-        setLabelToBeShown(this.getClass().getName());
+        setLabelToBeShown(this.getClass().getName().substring(this.getClass().getName().lastIndexOf('.') + 1));
 
 
     }

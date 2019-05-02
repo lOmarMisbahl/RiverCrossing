@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Plant extends Crosser {
     public Plant(){
         this.setEatingRank(1);
-        setLabelToBeShown(this.getClass().getName());
+        setLabelToBeShown(this.getClass().getName().substring(this.getClass().getName().lastIndexOf('.') + 1));
 
     }
     @Override

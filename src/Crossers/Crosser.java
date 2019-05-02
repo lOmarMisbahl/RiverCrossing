@@ -31,7 +31,7 @@ public  class Crosser implements ICrosser {
     @Override
     public void setWeight(double weight) {
         this.Weight = weight;
-        setLabelToBeShown(this.getClass().getName()+(int)Weight);
+        setLabelToBeShown( Label +'\n'+"Weight : "+ (int)Weight);
     }
     @Override
     public void setEatingRank(int eatingRank) {
