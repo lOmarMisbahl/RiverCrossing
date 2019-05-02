@@ -28,22 +28,22 @@ public class LevelOne implements ICrossingStrategy {
             for (int j=1;j<rightBankCrossers.size();j++) {
                 ICrosser y = rightBankCrossers.get(i);
                 ICrosser z = rightBankCrossers.get(j);
-            if(y.getEatingRank()-z.getEatingRank()==1)
-                rightBankError=true;
-            else
-                rightBankError= false;
+                if(y.getEatingRank()-z.getEatingRank()==1)
+                    rightBankError=true;
+                else
+                    rightBankError= false;
             }
         }
 
         for (int i=0;(i<leftBankCrossers.size()-1);i++) {
             for (int j=1;j<leftBankCrossers.size();j++) {
                 ICrosser y = leftBankCrossers.get(i);
-            ICrosser z = leftBankCrossers.get(j);
-            if(y.getEatingRank()-z.getEatingRank()==1)
-                leftBankError=true;
-            else
-                leftBankError= false;
-         }
+                ICrosser z = leftBankCrossers.get(j);
+                if(y.getEatingRank()-z.getEatingRank()==1)
+                    leftBankError=true;
+                else
+                    leftBankError= false;
+            }
         }
 
         if(boatCanSail && !leftBankError &&  !rightBankError)
