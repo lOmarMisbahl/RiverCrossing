@@ -1,7 +1,5 @@
 import Crossers.ICrosser;
-import Strategy.LevelOne;
 import Strategy.LevelTwo;
-import Strategy.Test;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +21,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+     private Save save = new Save();
+     private Load load = new Load();
 
     GameEngine gameEngine;
     @FXML
@@ -148,8 +149,6 @@ public class Controller implements Initializable {
     }
     void moveToSide(ImageView A,Boolean fromLeftToRightBank){
         if (fromLeftToRightBank){
-            FilesParser parser = new FilesParser();
-            parser.WriteSaveGame();
             LeftSide.getChildren().add(A);
         }else {
             RightSide.getChildren().add(A);
@@ -158,8 +157,7 @@ public class Controller implements Initializable {
     void moveToBoat(ImageView A,Boolean fromLeftToRightBank){
 
         if (fromLeftToRightBank){
-            FilesParser parser = new FilesParser();
-            parser.WriteSaveGame();
+            gameEngine.Command(save);
             LeftSide.getChildren().remove(A);
         }else {
             RightSide.getChildren().remove(A);

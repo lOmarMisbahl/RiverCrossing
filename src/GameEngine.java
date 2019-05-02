@@ -1,4 +1,3 @@
-import Crossers.Farmer;
 import Crossers.ICrosser;
 import Strategy.ICrossingStrategy;
 import Strategy.LevelOne;
@@ -14,7 +13,7 @@ public class GameEngine implements IGameController{
     List<ICrosser> leftBank = new ArrayList<ICrosser>();
     List<ICrosser> boatRiders = new ArrayList<ICrosser>();
     String boatPosition = "L";
-    int sails = 0;
+    int sails;
     public static GameEngine getInstance() {
         return ourInstance;
     }
@@ -159,5 +158,9 @@ public class GameEngine implements IGameController{
             System.out.println("No more room on boat");
             return false;
         }
+    }
+
+    public void Command(Command Order){
+        Order.Execute();
     }
 }
