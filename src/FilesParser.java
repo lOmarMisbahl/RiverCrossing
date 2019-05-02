@@ -127,7 +127,7 @@ public class FilesParser {
                     Farmer.appendChild(document.createTextNode("1"));
                     Left.appendChild(Farmer);
                     Element FarmerWeight = document.createElement("Weight");
-                    Farmer.appendChild(document.createTextNode(Double.toString(Save.leftBank.get(temp).getWeight())));
+                    FarmerWeight.appendChild(document.createTextNode(Double.toString(Save.leftBank.get(temp).getWeight())));
                     Farmer.appendChild(FarmerWeight);
                 } else if (Save.leftBank.get(temp) instanceof Wolf) {
                     Element Wolf = document.createElement("Wolf");
@@ -138,7 +138,7 @@ public class FilesParser {
                     Sheep.appendChild(document.createTextNode("1"));
                     Left.appendChild(Sheep);
                     Element SheepWeight = document.createElement("Weight");
-                    Sheep.appendChild(document.createTextNode(Double.toString(Save.leftBank.get(temp).getWeight())));
+                    SheepWeight.appendChild(document.createTextNode(Double.toString(Save.leftBank.get(temp).getWeight())));
                     Sheep.appendChild(SheepWeight);
                 } else if (Save.leftBank.get(temp) instanceof Plant) {
                     Element Plant = document.createElement("Plant");
@@ -154,7 +154,7 @@ public class FilesParser {
                     Farmer.appendChild(document.createTextNode("1"));
                     Right.appendChild(Farmer);
                     Element FarmerWeight = document.createElement("Weight");
-                    Farmer.appendChild(document.createTextNode(Double.toString(Save.rightBank.get(temp).getWeight())));
+                    FarmerWeight.appendChild(document.createTextNode(Double.toString(Save.rightBank.get(temp).getWeight())));
                     Farmer.appendChild(FarmerWeight);
                 } else if (Save.rightBank.get(temp) instanceof Wolf) {
                     Element Wolf = document.createElement("Wolf");
@@ -165,7 +165,7 @@ public class FilesParser {
                     Sheep.appendChild(document.createTextNode("1"));
                     Right.appendChild(Sheep);
                     Element SheepWeight = document.createElement("Weight");
-                    Sheep.appendChild(document.createTextNode(Double.toString(Save.rightBank.get(temp).getWeight())));
+                    SheepWeight.appendChild(document.createTextNode(Double.toString(Save.rightBank.get(temp).getWeight())));
                     Sheep.appendChild(SheepWeight);
                 } else if (Save.rightBank.get(temp) instanceof Plant) {
                     Element Plant = document.createElement("Plant");
@@ -181,7 +181,7 @@ public class FilesParser {
                     Farmer.appendChild(document.createTextNode("1"));
                     OnBoat.appendChild(Farmer);
                     Element FarmerWeight = document.createElement("Weight");
-                    Farmer.appendChild(document.createTextNode(Double.toString(Save.boatRiders.get(temp).getWeight())));
+                    FarmerWeight.appendChild(document.createTextNode(Double.toString(Save.boatRiders.get(temp).getWeight())));
                     Farmer.appendChild(FarmerWeight);
                 } else if (Save.boatRiders.get(temp) instanceof Wolf) {
                     Element Wolf = document.createElement("Wolf");
@@ -192,7 +192,7 @@ public class FilesParser {
                     Sheep.appendChild(document.createTextNode("1"));
                     OnBoat.appendChild(Sheep);
                     Element SheepWeight = document.createElement("Weight");
-                    Sheep.appendChild(document.createTextNode(Double.toString(Save.boatRiders.get(temp).getWeight())));
+                    SheepWeight.appendChild(document.createTextNode(Double.toString(Save.boatRiders.get(temp).getWeight())));
                     Sheep.appendChild(SheepWeight);
                 } else if (Save.boatRiders.get(temp) instanceof Plant) {
                     Element Plant = document.createElement("Plant");
@@ -206,11 +206,11 @@ public class FilesParser {
             Saves.appendChild(Sails);
 
             Element boatPosition = document.createElement("BoatPostion");
-            Sails.appendChild(document.createTextNode(Save.boatPosition));
+            boatPosition.appendChild(document.createTextNode(Save.boatPosition));
             Saves.appendChild(boatPosition);
 
             Element Level = document.createElement("Level");
-            Sails.appendChild(document.createTextNode(Integer.toString(Save.getLevelNumber())));
+            Level.appendChild(document.createTextNode(Integer.toString(Save.getLevelNumber())));
             Saves.appendChild(boatPosition);
 
 

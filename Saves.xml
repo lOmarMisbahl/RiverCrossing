@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Saves><Save><LeftBank><Wolf>1</Wolf><Sheep>10.0<Weight/></Sheep></LeftBank><RightBank/><OnBoat><Plant>1</Plant><Farmer>10.0<Weight/></Farmer></OnBoat><Sails>0L2</Sails><BoatPostion/></Save></Saves>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Saves><Save><LeftBank><Wolf>1</Wolf><Plant>1</Plant></LeftBank><RightBank/><OnBoat><Farmer>1<Weight>0.0</Weight></Farmer><Sheep>1<Weight>0.0</Weight></Sheep></OnBoat><Sails>0</Sails><BoatPostion>L</BoatPostion></Save></Saves>
