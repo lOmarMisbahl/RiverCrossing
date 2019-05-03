@@ -21,7 +21,8 @@ public class GameEngine implements IGameController{
     private GameEngine() {
 
     }
-
+    Originator originator = new Originator();
+    CareTacker careTaker = new CareTacker();
     @Override
     public void newGame(ICrossingStrategy gameStrategy) {
        this.gameStrategy = gameStrategy;
@@ -102,18 +103,23 @@ public class GameEngine implements IGameController{
 
     @Override
     public boolean canUndo() {
-        return false;
+
+        if(careTaker.getundo()==null)
+        { return  false;}
+        return true;
     }
 
     @Override
     public boolean canRedo() {
-        return false;
+        if(careTaker.getredo()==null)
+        { return  false;}
+        return true;
+
     }
 
     @Override
     public void undo() {
-        Originator originator = new Originator();
-        CareTacker careTaker = new CareTacker();
+
         System.out.println("Current State: " + originator.getState());
         Memento x = careTaker.saveundo();
         originator.getStateFromMemento(careTaker.getundo());
