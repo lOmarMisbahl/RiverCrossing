@@ -60,8 +60,25 @@ public class Controller implements Initializable {
 
         }
     }
+        private class Multi extends Thread{
+        ImageView x;
+        ICrosser y;
+        Multi(ImageView a,ICrosser b){
+            x = a;
+            y =b;
+        }
+        public void run(){
+            try {
+                Image image = SwingFXUtils.toFXImage(y.getImages().get(0), null);
 
-    void loadItems(){
+                x.setImage(image);
+                System.out.println("thread is running...");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    };
+        void loadItems(){
 
         IV.clear();
         myCrossers.clear();
@@ -95,9 +112,10 @@ public class Controller implements Initializable {
             try {
                 System.out.println("Loading Image...");
                 long startTime = System.nanoTime();
-                Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
+               // Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
 
-                IV.get(i).setImage(image);
+                //IV.get(i).setImage(image);
+                (new Multi(IV.get(i),I)).start();
                 long endTime   = System.nanoTime();
                 long totalTime = endTime - startTime;
                 System.out.println("Time Taken : "+(totalTime/1e9));
@@ -264,7 +282,7 @@ public class Controller implements Initializable {
         ICrosser myCrosser = myCrossers.get(myImageView.getChildren().get(1));
         addToMomento();
 
-        if (myCrosser.isOnBoat()){
+        if(gameEngine.getBoatRiders().contains(myCrosser)){ //(myCrosser.isOnBoat()){
                 moveToSide(myImageView,fromLeftToRightBank);
                 ArrayList<ICrosser> tmp = new ArrayList<>();
                 tmp.add(myCrosser);
@@ -382,12 +400,12 @@ public class Controller implements Initializable {
 
     }
     void addToMomento(){
-        Originator originator = new Originator();
-        CareTacker careTaker = new CareTacker();
+        Originator originator = gameEngine.getOriginator();
+        CareTacker careTaker = gameEngine.getCareTaker();
         //  while (game is on) data = game engine data
         originator.setState(gameEngine.getGameEngineData());
         careTaker.addundo(originator.saveStateToMemento());
-        System.out.printf("saved");
+        System.out.println("saved");
         checkUndoRedo();
     }
 

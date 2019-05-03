@@ -228,4 +228,12 @@ public class GameEngine implements IGameController{
     public GameEngineData getGameEngineData(){
         return new GameEngineData(this);
     }
+
+    public Originator getOriginator() {
+        return originator;
+    }
+
+    public CareTacker getCareTaker() {
+        return careTaker;
+    }
 }

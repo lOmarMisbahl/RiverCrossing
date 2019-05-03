@@ -3,8 +3,8 @@ import java.util.List;
 import java.util.Stack;
 
 public class CareTacker {
-   private static Stack<Memento> undo = new Stack<>();
-   private static Stack<Memento> redo = new Stack<>();
+   private  Stack<Memento> undo = new Stack<>();
+   private  Stack<Memento> redo = new Stack<>();
 
 
 
