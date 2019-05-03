@@ -135,8 +135,7 @@ public class GameEngine implements IGameController{
 
     @Override
     public void redo() {
-        Originator originator = new Originator();
-        CareTacker careTaker = new CareTacker();
+        
         originator.getStateFromMemento(careTaker.getredo());
         System.out.println("Current State: " + originator.getState());
     }
