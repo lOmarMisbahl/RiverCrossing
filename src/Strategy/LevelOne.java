@@ -69,7 +69,7 @@ public class LevelOne implements ICrossingStrategy {
 
     @Override
     public String[] getInstructions() {
-        String[] instructionOne = new String[]{"A farmer want to cross the river with a plant, a sheep and a wolf. The wolf and the sheep cant stay together on the right bank , the plant and the sheep cant stay together on the left bank. how to solve it? "};
+        String[] instructionOne = new String[]{"A farmer want to cross the river with a plant, a sheep and a wolf."," The wolf and the sheep cant stay together on the right bank "," the plant and the sheep cant stay together on the left bank. how to solve it? "};
         return instructionOne;
     }
 }

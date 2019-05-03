@@ -12,7 +12,7 @@ public class GameEngineData {
     List<ICrosser> boatRiders = new ArrayList<ICrosser>();
     String boatPosition = "L";
     int sails;
-    public GameEngineData(GameEngine gameEngine){
+    public GameEngineData(){
         
     }
 

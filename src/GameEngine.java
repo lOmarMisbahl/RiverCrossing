@@ -30,18 +30,19 @@ public class GameEngine implements IGameController{
        leftBank.addAll(gameStrategy.getInitialCrossers());
         System.out.println("size of left"+leftBank.size());
         boatPosition = "L";
-
+        sails = 0;
 
     }
 
     @Override
     public void resetGame() {
-
-        leftBank.addAll(gameStrategy.getInitialCrossers());
+        leftBank.clear();
+        //leftBank.addAll(gameStrategy.getInitialCrossers());
         rightBank.clear();
         boatRiders.clear();
         boatPosition = "L";
         sails = 0;
+        rightBank.addAll(gameStrategy.getInitialCrossers());
     }
 
     @Override
@@ -66,6 +67,11 @@ public class GameEngine implements IGameController{
         else
             return false;
     }
+
+    public void setBoatPosition(String boatPosition) {
+        this.boatPosition = boatPosition;
+    }
+
 
     @Override
     public int getNumberOfSails() {
@@ -160,6 +166,7 @@ public class GameEngine implements IGameController{
         }
         A.setOnBoat(false);
     }
+
     public boolean moveToBoat(ICrosser A,boolean fromLeftToRightBank ){
         if (boatRiders.size()<2){
             if (fromLeftToRightBank){

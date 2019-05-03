@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -52,30 +54,100 @@ public class Controller implements Initializable {
         }
         if (url.toString().contains("Game")) {
 
-            IV.add(Crosser1);
-            IV.add(Crosser2);
-            IV.add(Crosser3);
-            IV.add(Crosser4);
-            int i = 0;
-            for (ICrosser I:
-                    gameEngine.getCrossersOnLeftBank() ) {
-                try {
-
-                    Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
-                    IV.get(i).setImage(image);
-                    myCrossers.put(IV.get(i),I);
-                    moveToSide(IV.get(i),fromLeftToRightBank);
-                    i++;
-                } catch (Exception e) {
-                    //e.printStackTrace();
-                    System.out.println("Couldn't Load Image"+ i);
-                }
-            }
+        loadItems();
 
         }
     }
 
+    void loadItems(){
+        IV.clear();
+        myCrossers.clear();
+        IV.add(Crosser1);
+        IV.add(Crosser2);
+        IV.add(Crosser3);
+        IV.add(Crosser4);
+        IV.add(Crosser5);
+        RightSide.getChildren().clear();
+        LeftSide.getChildren().clear();
+        Boat.getChildren().clear();
 
+        String y = new String();
+        notetext.setEditable(false);
+        noteOk.setVisible(true);
+        notetext.setVisible(true);
+        note.setVisible(true);
+        fromLeftToRightBank = gameEngine.isBoatOnTheLeftBank();
+        for (String x:gameEngine.getInstructions()){
+            y +=( '\n' +x);
+        }
+        notetext.setText(y);
+        int i = 0;
+
+        for (ICrosser I:
+                gameEngine.getCrossersOnLeftBank() ) {
+            try {
+
+                Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
+                IV.get(i).setImage(image);
+                myCrossers.put(IV.get(i),I);
+                moveToSide(IV.get(i),true);
+                i++;
+            } catch (Exception e) {
+                //e.printStackTrace();
+                System.out.println("Couldn't Load Image on left bank"+ i);
+            }
+        }
+
+        for (ICrosser I:
+                gameEngine.getCrossersOnRightBank() ) {
+            try {
+
+                Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
+                IV.get(i).setImage(image);
+                myCrossers.put(IV.get(i),I);
+                moveToSide(IV.get(i),false);
+                i++;
+            } catch (Exception e) {
+                //e.printStackTrace();
+                System.out.println("Couldn't Load Image on right bank"+ i);
+            }
+        }
+        for (ICrosser I:
+                gameEngine.getBoatRiders() ) {
+            try {
+
+                Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
+                IV.get(i).setImage(image);
+                myCrossers.put(IV.get(i),I);
+                forcemoveToBoat(IV.get(i));
+                i++;
+            } catch (Exception e) {
+                //e.printStackTrace();
+                System.out.println("Couldn't Load Image in boat"+ i);
+            }
+        }
+        forceMoveBoat(fromLeftToRightBank);
+
+
+    }
+    @FXML
+    private ImageView Crosser5;
+
+
+    @FXML
+    private TextArea notetext;
+
+    @FXML
+    private Button noteOk;
+    @FXML
+    private ImageView note;
+
+    @FXML
+    void noteHide(ActionEvent event) {
+        noteOk.setVisible(false);
+        notetext.setVisible(false);
+        note.setVisible(false);
+    }
     @FXML
     void goToMenu(MouseEvent event) {
         try {
@@ -87,11 +159,27 @@ public class Controller implements Initializable {
         }
 
     }
+    @FXML
+    void goToMainMenu(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Menu.fxml"));
+            Scene scene = new Scene(loader.load());
+            ((Stage)((Node)event.getSource()).getScene().getWindow()).setScene(scene);
+        }catch (Exception e){
+            System.out.println("Error Loading Menu");
+        }
 
+    }
 
     @FXML
-    void resume(ActionEvent event) {
+    void resetGame(ActionEvent event) {
+        gameEngine.resetGame();
+        loadItems();
 
+    }
+    @FXML
+    void resume(ActionEvent event) {
+        //load game
     }
 
     @FXML
@@ -132,6 +220,11 @@ public class Controller implements Initializable {
 
     @FXML
     private HBox Boat;
+    @FXML
+    private ImageView rightboatpos;
+
+    @FXML
+    private ImageView lefttboatpos;
     private boolean fromLeftToRightBank = true;
     @FXML
     void moveCrosser(MouseEvent event){
@@ -162,6 +255,9 @@ public class Controller implements Initializable {
             RightSide.getChildren().add(A);
         }
     }
+    void forcemoveToBoat(ImageView A){
+        Boat.getChildren().add(A);
+    }
     void moveToBoat(ImageView A,Boolean fromLeftToRightBank){
 
         if (fromLeftToRightBank){
@@ -173,8 +269,6 @@ public class Controller implements Initializable {
     }
     @FXML
     void moveBoat(MouseEvent event) {
-
-        //System.out.println(gameEngine.canMove(gameEngine.getBoatRiders(),fromLeftToRightBank));
         if(gameEngine.canMove(gameEngine.getBoatRiders(),fromLeftToRightBank)) {
             if (fromLeftToRightBank) {
                 BoatGroup.setLayoutX(RightSide.getLayoutX() + 10);
@@ -188,6 +282,15 @@ public class Controller implements Initializable {
             }
         }
         gameEngine.Command(save);
+    }
+    private void forceMoveBoat(boolean fromLeftToRightBank){
+        if (!fromLeftToRightBank) {
+            BoatGroup.setLayoutX(rightboatpos.getLayoutX());
+            BoatGroup.setLayoutY(rightboatpos.getLayoutY());
+        } else {
+            BoatGroup.setLayoutX(lefttboatpos.getLayoutX());
+            BoatGroup.setLayoutY(lefttboatpos.getLayoutY());
+        }
     }
     @FXML
     void loadLevelOne(MouseEvent event) {
