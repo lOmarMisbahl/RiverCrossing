@@ -1,11 +1,11 @@
 public class Originator {
-    private GameEngine state;
+    private GameEngineData state;
 
-    public void setState(GameEngine state){
+    public void setState(GameEngineData state){
         this.state = state;
     }
 
-    public GameEngine getState(){
+    public GameEngineData getState(){
         return state;
     }
 

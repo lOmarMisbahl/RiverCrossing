@@ -1,15 +1,26 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class CareTacker {
-    private List<Memento> mementoList = new ArrayList<Memento>();
+   private  Stack<Memento> undo = new Stack<>();
+   private  Stack<Memento> redo = new Stack<>();
 
-    public void add(Memento state){
-        mementoList.add(state);
+
+
+    public void addundo (Memento state){
+        undo.push(state);
+    }
+    public void addredo (Memento state){
+        redo.push(state);
     }
 
-    public Memento get(int index){
-        return mementoList.get(index);
+    public Memento getundo(){ return undo.pop(); }
+    public Memento saveundo(){return undo.peek();}
+    public Memento getredo(){
+        return undo.pop();
     }
+
+
 
 }

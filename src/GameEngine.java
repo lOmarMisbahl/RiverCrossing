@@ -112,12 +112,21 @@ public class GameEngine implements IGameController{
 
     @Override
     public void undo() {
-
+        Originator originator = new Originator();
+        CareTacker careTaker = new CareTacker();
+        System.out.println("Current State: " + originator.getState());
+        Memento x = careTaker.saveundo();
+        originator.getStateFromMemento(careTaker.getundo());
+        System.out.println("Current State: " + originator.getState());
+        careTaker.addredo(x);
     }
 
     @Override
     public void redo() {
-
+        Originator originator = new Originator();
+        CareTacker careTaker = new CareTacker();
+        originator.getStateFromMemento(careTaker.getredo());
+        System.out.println("Current State: " + originator.getState());
     }
     /******Save/Load ***************/
     @Override
@@ -159,6 +168,16 @@ public class GameEngine implements IGameController{
         }else {
             System.out.println("No more room on boat");
             return false;
+        }
+    }
+    public void Command(Command Order){
+        Order.Execute();
+    }
+    public int getLevelNumber(){
+        if (gameStrategy instanceof LevelOne ){
+            return 1;
+        }else{
+            return 2;
         }
     }
 }

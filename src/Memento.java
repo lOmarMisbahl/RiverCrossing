@@ -1,11 +1,11 @@
 public class Memento {
-    private GameEngine state;
+    private GameEngineData state;
 
-    public Memento(GameEngine state){
+    public Memento(GameEngineData state){
         this.state = state;
     }
 
-    public GameEngine getState(){
+    public GameEngineData getState(){
         return state;
     }
 }

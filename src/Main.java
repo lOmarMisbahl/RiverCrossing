@@ -4,6 +4,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Stack;
+
 public class Main extends Application {
 
     @Override
@@ -26,29 +28,19 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+
         launch(args);
-        GameEngineData z = new GameEngineData();
-        GameEngineData y = new GameEngineData();
-        GameEngineData x = new GameEngineData();
         Originator originator = new Originator();
         CareTacker careTaker = new CareTacker();
+        GameEngineData data = new GameEngineData();
+      //  while (game is on) data = game engine data
+        originator.setState(data);
+        careTaker.addundo(originator.saveStateToMemento());
 
-        originator.setState(z);
-        careTaker.add(originator.saveStateToMemento());
-        z.setBoatPosition("R");
-
-        originator.setState(y);
-        careTaker.add(originator.saveStateToMemento());
-        z.setBoatPosition("L");
-
-        originator.setState(x);
-        System.out.println("Current State: " + originator.getState());
-
-        originator.getStateFromMemento(careTaker.get(0));
-        System.out.println("First saved State: " + originator.getState());
+       /* System.out.println("First saved State: " + originator.getState());
         //System.out.println( originator.getStateFromMemento(careTaker.get(3)));
-        originator.getStateFromMemento(careTaker.get(1));
-        System.out.println("Second saved State: " + originator.getState());
+        originator.getStateFromMemento(careTaker.getundo());
+        System.out.println("Second saved State: " + originator.getState());*/
 
 
     }
