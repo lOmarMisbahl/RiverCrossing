@@ -10,31 +10,26 @@ import java.util.List;
 public class GameEngine implements IGameController{
     private static GameEngine ourInstance = new GameEngine();
     private ICrossingStrategy gameStrategy ;
-    List<ICrosser> rightBank = new ArrayList<ICrosser>();
-    List<ICrosser> leftBank = new ArrayList<ICrosser>();
-    List<ICrosser> boatRiders = new ArrayList<ICrosser>();
-    String boatPosition = "L";
+    private List<ICrosser> rightBank = new ArrayList<ICrosser>();
+    private List<ICrosser> leftBank = new ArrayList<ICrosser>();
+    private List<ICrosser> boatRiders = new ArrayList<ICrosser>();
+    private String boatPosition = "L";
     private boolean notification ;
-    int sails = 0;
+    private int sails = 0;
+    private Originator originator = new Originator();
+    private CareTacker careTaker = new CareTacker();
     public static GameEngine getInstance() {
         return ourInstance;
     }
     private GameEngine() {
 
     }
-    Originator originator = new Originator();
-    CareTacker careTaker = new CareTacker();
+
     @Override
     public void newGame(ICrossingStrategy gameStrategy) {
-       originator = new Originator();
-       careTaker = new CareTacker();
-       this.gameStrategy = gameStrategy;
-        notification = true;
-       leftBank.addAll(gameStrategy.getInitialCrossers());
-        System.out.println("size of left"+leftBank.size());
-        boatPosition = "L";
-        sails = 0;
 
+       this.gameStrategy = gameStrategy;
+        resetGame();
     }
 
     @Override
@@ -88,6 +83,10 @@ public class GameEngine implements IGameController{
         this.boatPosition = boatPosition;
     }
 
+    public String getBoatPosition() {
+        return boatPosition;
+    }
+
     public void sail(){
         sails++;
     }
@@ -95,6 +94,10 @@ public class GameEngine implements IGameController{
     @Override
     public int getNumberOfSails() {
         return sails;
+    }
+
+    public void setSails(int sails) {
+        this.sails = sails;
     }
 
     @Override
@@ -119,8 +122,14 @@ public class GameEngine implements IGameController{
 
     @Override
     public void doMove(List<ICrosser> crossers, boolean fromLeftToRightBank) {
-        sails++;
-
+        ICrosser A = crossers.get(0);
+        boatRiders.remove(A);
+        if (fromLeftToRightBank){
+            leftBank.add(A);
+        }else {
+            rightBank.add(A);
+        }
+        A.setOnBoat(false);
 
     }
 
@@ -176,17 +185,6 @@ public class GameEngine implements IGameController{
     @Override
     public List<List<ICrosser>> solveGame() {
         return null;
-    }
-
-    public void getOffBoat(ICrosser A, boolean fromLeftToRightBank){
-
-        boatRiders.remove(A);
-        if (fromLeftToRightBank){
-            leftBank.add(A);
-        }else {
-            rightBank.add(A);
-        }
-        A.setOnBoat(false);
     }
 
     public boolean moveToBoat(ICrosser A,boolean fromLeftToRightBank ){

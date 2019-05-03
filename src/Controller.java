@@ -1,3 +1,4 @@
+import Crossers.Farmer;
 import Crossers.ICrosser;
 import Strategy.LevelThree;
 import Strategy.*;
@@ -19,10 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller implements Initializable {
 
@@ -95,15 +93,16 @@ public class Controller implements Initializable {
         for (ICrosser I:
                 gameEngine.getCrossersOnLeftBank() ) {
             try {
-                System.out.println("Loading Image Time");
+                System.out.println("Loading Image...");
                 long startTime = System.nanoTime();
                 Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
+
+                IV.get(i).setImage(image);
                 long endTime   = System.nanoTime();
                 long totalTime = endTime - startTime;
-                System.out.println(totalTime/1e9);
-                IV.get(i).setImage(image);
+                System.out.println("Time Taken : "+(totalTime/1e9));
                 myCrossers.put(IV.get(i),I);
-                moveToSide(IV.get(i),true);
+                moveToSide(new VBox(new Label(I.getLabelToBeShown()),IV.get(i)),true);
                 i++;
             } catch (Exception e) {
                 //e.printStackTrace();
@@ -117,8 +116,9 @@ public class Controller implements Initializable {
 
                 Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
                 IV.get(i).setImage(image);
+
                 myCrossers.put(IV.get(i),I);
-                moveToSide(IV.get(i),false);
+                moveToSide(new VBox(new Label(I.getLabelToBeShown()),IV.get(i)),false);
                 i++;
             } catch (Exception e) {
                 //e.printStackTrace();
@@ -132,7 +132,7 @@ public class Controller implements Initializable {
                 Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
                 IV.get(i).setImage(image);
                 myCrossers.put(IV.get(i),I);
-                forcemoveToBoat(IV.get(i));
+                forcemoveToBoat(new VBox(new Label(I.getLabelToBeShown()),IV.get(i)));
                 i++;
             } catch (Exception e) {
                 //e.printStackTrace();
@@ -156,7 +156,7 @@ public class Controller implements Initializable {
         loadItems();
     }
     @FXML
-    private TextArea notetext;
+    private TextArea  notetext;
 
     @FXML
     private Button noteOk;
@@ -259,37 +259,40 @@ public class Controller implements Initializable {
     private boolean fromLeftToRightBank = true;
     @FXML
     void moveCrosser(MouseEvent event){
-        ImageView myImageView = ((ImageView)event.getSource());
-        ICrosser myCrosser = myCrossers.get(myImageView);
+       // ImageView myImageView = ((ImageView)event.getSource());
+        VBox myImageView =(VBox) ((ImageView)event.getSource()).getParent();
+        ICrosser myCrosser = myCrossers.get(myImageView.getChildren().get(1));
         addToMomento();
 
         if (myCrosser.isOnBoat()){
                 moveToSide(myImageView,fromLeftToRightBank);
-                gameEngine.getOffBoat(myCrosser,fromLeftToRightBank);
+                ArrayList<ICrosser> tmp = new ArrayList<>();
+                tmp.add(myCrosser);
+                gameEngine.doMove(tmp,fromLeftToRightBank);
 
         }else {
-            if (gameEngine.leftBank.contains(myCrosser)&&fromLeftToRightBank){
+            if (gameEngine.getCrossersOnLeftBank().contains(myCrosser)&&fromLeftToRightBank){
                 if (gameEngine.moveToBoat(myCrosser,fromLeftToRightBank)) {
                     moveToBoat(myImageView, fromLeftToRightBank);
                 }
-            }else if( gameEngine.rightBank.contains(myCrosser)&&!fromLeftToRightBank ) {
+            }else if( gameEngine.getCrossersOnRightBank() .contains(myCrosser)&&!fromLeftToRightBank ) {
                 if (gameEngine.moveToBoat(myCrosser,fromLeftToRightBank)) {
                     moveToBoat(myImageView, fromLeftToRightBank);
                 }
             }
         }
     }
-    void moveToSide(ImageView A,Boolean fromLeftToRightBank){
+    void moveToSide(VBox A,Boolean fromLeftToRightBank){
         if (fromLeftToRightBank){
             LeftSide.getChildren().add(A);
         }else {
             RightSide.getChildren().add(A);
         }
     }
-    void forcemoveToBoat(ImageView A){
+    void forcemoveToBoat(VBox A){
         Boat.getChildren().add(A);
     }
-    void moveToBoat(ImageView A,Boolean fromLeftToRightBank){
+    void moveToBoat(VBox A,Boolean fromLeftToRightBank){
 
         if (fromLeftToRightBank){
             LeftSide.getChildren().remove(A);
@@ -304,13 +307,13 @@ public class Controller implements Initializable {
         if(gameEngine.canMove(gameEngine.getBoatRiders(),fromLeftToRightBank)) {
             addToMomento();
             if (fromLeftToRightBank) {
-                BoatGroup.setLayoutX(RightSide.getLayoutX() + 10);
-                BoatGroup.setLayoutY(RightSide.getLayoutY() + BoatGroup.getHeight());
+                BoatGroup.setLayoutX(rightboatpos.getLayoutX());
+                BoatGroup.setLayoutY(rightboatpos.getLayoutY());
                 fromLeftToRightBank = false;
                 gameEngine.setBoatPosition("R");
             } else {
-                BoatGroup.setLayoutX(LeftSide.getLayoutX() + 10);
-                BoatGroup.setLayoutY(LeftSide.getLayoutY() + BoatGroup.getHeight() - 20);
+                BoatGroup.setLayoutX(lefttboatpos.getLayoutX());
+                BoatGroup.setLayoutY(lefttboatpos.getLayoutY());
                 fromLeftToRightBank = true;
                 gameEngine.setBoatPosition("L");
 
@@ -386,5 +389,10 @@ public class Controller implements Initializable {
         careTaker.addundo(originator.saveStateToMemento());
         System.out.printf("saved");
         checkUndoRedo();
+    }
+
+    @FXML
+    void closeWindow(ActionEvent event) {
+        ((Stage)((Node)event.getSource()).getScene().getWindow()).close();
     }
 }

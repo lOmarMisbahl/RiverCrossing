@@ -48,13 +48,13 @@ public class FilesParser {
 
 
                     if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Wolf"))
-                        Save.leftBank.add(Wolf);
+                        Save.getCrossersOnLeftBank().add(Wolf);
                     if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Farmer"))
-                        Save.leftBank.add(farmer);
+                        Save.getCrossersOnLeftBank().add(farmer);
                     if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Sheep"))
-                        Save.leftBank.add(Sheep);
+                        Save.getCrossersOnLeftBank().add(Sheep);
                     if (LeftBankN.getChildNodes().item(temp).getNodeName().equals("Plant"))
-                        Save.leftBank.add(Plant);
+                        Save.getCrossersOnLeftBank().add(Plant);
                 }
 
 
@@ -62,29 +62,29 @@ public class FilesParser {
 
 
                     if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Wolf"))
-                        Save.rightBank.add(Wolf);
+                        Save.getCrossersOnRightBank().add(Wolf);
                     if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Farmer"))
-                        Save.rightBank.add(farmer);
+                        Save.getCrossersOnRightBank().add(farmer);
                     if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Sheep"))
-                        Save.rightBank.add(Sheep);
+                        Save.getCrossersOnRightBank().add(Sheep);
                     if (RightBankN.getChildNodes().item(temp).getNodeName().equals("Plant"))
-                        Save.rightBank.add(Plant);
+                        Save.getCrossersOnRightBank().add(Plant);
                 }
 
                 for (temp = 0; temp < OnBoatN.getChildNodes().getLength(); temp++) {
 
 
                     if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Wolf"))
-                        Save.boatRiders.add(Wolf);
+                        Save.getBoatRiders().add(Wolf);
                     if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Farmer"))
-                        Save.boatRiders.add(farmer);
+                        Save.getBoatRiders().add(farmer);
                     if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Sheep"))
-                        Save.boatRiders.add(Sheep);
+                        Save.getBoatRiders().add(Sheep);
                     if (OnBoatN.getChildNodes().item(temp).getNodeName().equals("Plant"))
-                        Save.boatRiders.add(Plant);
+                        Save.getBoatRiders().add(Plant);
                 }
 
-                Save.sails=Integer.parseInt(SailsN.getLastChild().getTextContent());
+                Save.setSails(Integer.parseInt(SailsN.getLastChild().getTextContent()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -120,94 +120,94 @@ public class FilesParser {
             int temp;
 
 
-            for (temp = 0; temp < Save.leftBank.size(); temp++) {
-                System.out.println("left"+Save.leftBank.size());
-                System.out.println("boat"+Save.boatRiders.size());
-                System.out.println("right"+Save.rightBank.size());
+            for (temp = 0; temp < Save.getCrossersOnLeftBank().size(); temp++) {
+                System.out.println("left"+Save.getCrossersOnLeftBank().size());
+                System.out.println("boat"+Save.getBoatRiders().size());
+                System.out.println("right"+Save.getCrossersOnRightBank().size());
 
-                if (Save.leftBank.get(temp) instanceof Farmer) {
+                if (Save.getCrossersOnLeftBank().get(temp) instanceof Farmer) {
                     Element Farmer = document.createElement("Farmer");
                     Farmer.appendChild(document.createTextNode("1"));
                     Left.appendChild(Farmer);
                     Element FarmerWeight = document.createElement("Weight");
-                    FarmerWeight.appendChild(document.createTextNode(Double.toString(Save.leftBank.get(temp).getWeight())));
+                    FarmerWeight.appendChild(document.createTextNode(Double.toString(Save.getCrossersOnLeftBank().get(temp).getWeight())));
                     Farmer.appendChild(FarmerWeight);
-                } else if (Save.leftBank.get(temp) instanceof Wolf) {
+                } else if (Save.getCrossersOnLeftBank().get(temp) instanceof Wolf) {
                     Element Wolf = document.createElement("Wolf");
                     Wolf.appendChild(document.createTextNode("1"));
                     Left.appendChild(Wolf);
-                } else if (Save.leftBank.get(temp) instanceof Sheep) {
+                } else if (Save.getCrossersOnLeftBank().get(temp) instanceof Sheep) {
                     Element Sheep = document.createElement("Sheep");
                     Element IsSheep = document.createElement("IsSheep");
                     IsSheep.appendChild(document.createTextNode("1"));
                     Sheep.appendChild(IsSheep);
                     Element SheepWeight = document.createElement("Weight");
-                    SheepWeight.appendChild(document.createTextNode(Double.toString(Save.leftBank.get(temp).getWeight())));
+                    SheepWeight.appendChild(document.createTextNode(Double.toString(Save.getCrossersOnLeftBank().get(temp).getWeight())));
                     Sheep.appendChild(SheepWeight);
                     Left.appendChild(Sheep);
-                } else if (Save.leftBank.get(temp) instanceof Plant) {
+                } else if (Save.getCrossersOnLeftBank().get(temp) instanceof Plant) {
                     Element Plant = document.createElement("Plant");
                     Plant.appendChild(document.createTextNode("1"));
                     Left.appendChild(Plant);
                 }
             }
 
-            for (temp = 0; temp < Save.rightBank.size(); temp++) {
+            for (temp = 0; temp < Save.getCrossersOnRightBank().size(); temp++) {
 
-                if (Save.rightBank.get(temp) instanceof Farmer) {
+                if (Save.getCrossersOnRightBank().get(temp) instanceof Farmer) {
                     Element Farmer = document.createElement("Farmer");
                     Element IsFarmer = document.createElement("IsFarmer");
                     IsFarmer.appendChild(document.createTextNode("1"));
                     Farmer.appendChild(IsFarmer);
                     Element FarmerWeight = document.createElement("Weight");
-                    FarmerWeight.appendChild(document.createTextNode(Double.toString(Save.rightBank.get(temp).getWeight())));
+                    FarmerWeight.appendChild(document.createTextNode(Double.toString(Save.getCrossersOnRightBank().get(temp).getWeight())));
                     Farmer.appendChild(FarmerWeight);
                     Right.appendChild(Farmer);
-                } else if (Save.rightBank.get(temp) instanceof Wolf) {
+                } else if (Save.getCrossersOnRightBank().get(temp) instanceof Wolf) {
                     Element Wolf = document.createElement("Wolf");
                     Wolf.appendChild(document.createTextNode("1"));
                     Right.appendChild(Wolf);
-                } else if (Save.rightBank.get(temp) instanceof Sheep) {
+                } else if (Save.getCrossersOnRightBank().get(temp) instanceof Sheep) {
                     Element Sheep = document.createElement("Sheep");
                     Element IsSheep = document.createElement("IsSheep");
                     IsSheep.appendChild(document.createTextNode("1"));
                     Sheep.appendChild(IsSheep);
                     Element SheepWeight = document.createElement("Weight");
-                    SheepWeight.appendChild(document.createTextNode(Double.toString(Save.rightBank.get(temp).getWeight())));
+                    SheepWeight.appendChild(document.createTextNode(Double.toString(Save.getCrossersOnRightBank().get(temp).getWeight())));
                     Sheep.appendChild(SheepWeight);
                     OnBoat.appendChild(Sheep);
-                } else if (Save.rightBank.get(temp) instanceof Plant) {
+                } else if (Save.getCrossersOnRightBank().get(temp) instanceof Plant) {
                     Element Plant = document.createElement("Plant");
                     Plant.appendChild(document.createTextNode("1"));
                     Right.appendChild(Plant);
                 }
             }
 
-            for (temp = 0; temp < Save.boatRiders.size(); temp++) {
+            for (temp = 0; temp < Save.getBoatRiders().size(); temp++) {
 
-                if (Save.boatRiders.get(temp) instanceof Farmer) {
+                if (Save.getBoatRiders().get(temp) instanceof Farmer) {
                     Element Farmer = document.createElement("Farmer");
                     Element IsFarmer = document.createElement("IsFarmer");
                     IsFarmer.appendChild(document.createTextNode("1"));
                     Farmer.appendChild(IsFarmer);
                     Element FarmerWeight = document.createElement("Weight");
-                    FarmerWeight.appendChild(document.createTextNode(Double.toString(Save.boatRiders.get(temp).getWeight())));
+                    FarmerWeight.appendChild(document.createTextNode(Double.toString(Save.getBoatRiders().get(temp).getWeight())));
                     Farmer.appendChild(FarmerWeight);
                     OnBoat.appendChild(Farmer);
-                } else if (Save.boatRiders.get(temp) instanceof Wolf) {
+                } else if (Save.getBoatRiders().get(temp) instanceof Wolf) {
                     Element Wolf = document.createElement("Wolf");
                     Wolf.appendChild(document.createTextNode("1"));
                     OnBoat.appendChild(Wolf);
-                } else if (Save.boatRiders.get(temp) instanceof Sheep) {
+                } else if (Save.getBoatRiders().get(temp) instanceof Sheep) {
                     Element Sheep = document.createElement("Sheep");
                     Element IsSheep = document.createElement("IsSheep");
                     IsSheep.appendChild(document.createTextNode("1"));
                     Sheep.appendChild(IsSheep);
                     Element SheepWeight = document.createElement("Weight");
-                    SheepWeight.appendChild(document.createTextNode(Double.toString(Save.boatRiders.get(temp).getWeight())));
+                    SheepWeight.appendChild(document.createTextNode(Double.toString(Save.getBoatRiders().get(temp).getWeight())));
                     Sheep.appendChild(SheepWeight);
                     OnBoat.appendChild(Sheep);
-                } else if (Save.boatRiders.get(temp) instanceof Plant) {
+                } else if (Save.getBoatRiders().get(temp) instanceof Plant) {
                     Element Plant = document.createElement("Plant");
                     Plant.appendChild(document.createTextNode("1"));
                     OnBoat.appendChild(Plant);
@@ -215,11 +215,11 @@ public class FilesParser {
             }
 
             Element Sails = document.createElement("Sails");
-            Sails.appendChild(document.createTextNode(Integer.toString(Save.sails)));
+            Sails.appendChild(document.createTextNode(Integer.toString(Save.getNumberOfSails())));
             Saves.appendChild(Sails);
 
             Element boatPosition = document.createElement("BoatPostion");
-            boatPosition.appendChild(document.createTextNode(Save.boatPosition));
+            boatPosition.appendChild(document.createTextNode(Save.getBoatPosition()));
             Saves.appendChild(boatPosition);
 
             Element Level = document.createElement("Level");

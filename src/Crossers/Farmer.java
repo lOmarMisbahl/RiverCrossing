@@ -1,13 +1,19 @@
 package Crossers;
 
+import javafx.scene.image.Image;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 public class Farmer extends Crosser {
+
     public Farmer(){
-        setLabelToBeShown(this.getClass().getName());
+
+
+        setLabelToBeShown(this.getClass().getName().substring(this.getClass().getName().lastIndexOf('.') + 1));
         this.setEatingRank(4);
 
 

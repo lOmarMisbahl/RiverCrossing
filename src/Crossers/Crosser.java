@@ -1,11 +1,12 @@
 package Crossers;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public  class Crosser implements ICrosser {
+abstract public class Crosser implements ICrosser {
     private double Weight;
     private String Label;
     private int EatingRank;
@@ -31,7 +32,7 @@ public  class Crosser implements ICrosser {
     @Override
     public void setWeight(double weight) {
         this.Weight = weight;
-        setLabelToBeShown( Label +'\n'+"Weight : "+ (int)Weight);
+        setLabelToBeShown( Label +'\n'+"W : "+ (int)Weight);
     }
     @Override
     public void setEatingRank(int eatingRank) {
@@ -72,7 +73,6 @@ public  class Crosser implements ICrosser {
     public String getLabelToBeShown() {
         return this.Label;
     }
-
 
 
     public ArrayList<WritableImage> ToNormalImages() throws Exception{
