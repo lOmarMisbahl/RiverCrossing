@@ -40,6 +40,9 @@ public class Controller implements Initializable {
 
     @FXML
     private ImageView Crosser2;
+    @FXML
+    private ImageView Crosser5;
+
     Map<ImageView, ICrosser> myCrossers = new HashMap<>();
 
     ArrayList<ImageView> IV = new ArrayList<>();
@@ -130,10 +133,13 @@ public class Controller implements Initializable {
 
 
     }
+
+
     @FXML
-    private ImageView Crosser5;
-
-
+    void undo(MouseEvent event) {
+        gameEngine.undo();
+        loadItems();
+    }
     @FXML
     private TextArea notetext;
 
@@ -161,6 +167,13 @@ public class Controller implements Initializable {
     }
     @FXML
     void goToMainMenu(ActionEvent event) {
+        Originator originator = new Originator();
+        CareTacker careTaker = new CareTacker();
+        //  while (game is on) data = game engine data
+        originator.setState(gameEngine.getGameEngineData());
+        careTaker.addundo(originator.saveStateToMemento());
+        System.out.printf("saved");
+        /*
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Menu.fxml"));
             Scene scene = new Scene(loader.load());
@@ -168,7 +181,7 @@ public class Controller implements Initializable {
         }catch (Exception e){
             System.out.println("Error Loading Menu");
         }
-
+        */
     }
 
     @FXML

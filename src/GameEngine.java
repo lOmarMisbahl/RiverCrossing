@@ -37,12 +37,15 @@ public class GameEngine implements IGameController{
     @Override
     public void resetGame() {
         leftBank.clear();
-        //leftBank.addAll(gameStrategy.getInitialCrossers());
+        leftBank.addAll(gameStrategy.getInitialCrossers());
         rightBank.clear();
         boatRiders.clear();
         boatPosition = "L";
         sails = 0;
-        rightBank.addAll(gameStrategy.getInitialCrossers());
+        //rightBank.addAll(gameStrategy.getInitialCrossers());
+    }
+    public ICrossingStrategy getGameStrategy() {
+        return gameStrategy;
     }
 
     @Override
@@ -130,6 +133,7 @@ public class GameEngine implements IGameController{
         Memento x = careTaker.saveundo();
         originator.getStateFromMemento(careTaker.getundo());
         System.out.println("Current State: " + originator.getState());
+        setThis(originator.getState());
         careTaker.addredo(x);
     }
 
@@ -138,6 +142,8 @@ public class GameEngine implements IGameController{
         
         originator.getStateFromMemento(careTaker.getredo());
         System.out.println("Current State: " + originator.getState());
+        setThis(originator.getState());
+
     }
     /******Save/Load ***************/
     @Override
@@ -191,5 +197,20 @@ public class GameEngine implements IGameController{
         }else{
             return 2;
         }
+    }
+    public void setThis(GameEngineData myGameEngineData){
+        this.boatRiders = myGameEngineData.getBoatRiders();
+        this.leftBank = myGameEngineData.getLeftBank();
+        this.rightBank = myGameEngineData.getRightBank();
+        this.sails = myGameEngineData.getSails();
+        this.boatPosition = myGameEngineData.getBoatPosition();
+        this.gameStrategy = myGameEngineData.getGameStrategy();
+        System.out.printf("Size of left" + leftBank.size());
+        System.out.printf("Size of boat" + boatRiders.size());
+        System.out.printf("Size of right" + rightBank.size());
+
+    }
+    public GameEngineData getGameEngineData(){
+        return new GameEngineData(this);
     }
 }

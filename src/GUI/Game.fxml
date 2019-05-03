@@ -53,9 +53,14 @@
             <Image url="@Images/alert.jpg" />
          </image>
       </ImageView>
-      <TextArea fx:id="notetext" layoutX="174.0" layoutY="191.0" opacity="0.61" prefHeight="90.0" prefWidth="250.0" wrapText="true" />
+      <TextArea fx:id="notetext" disable="true" editable="false" layoutX="174.0" layoutY="191.0" opacity="0.61" prefHeight="90.0" prefWidth="250.0" wrapText="true" />
       <Button fx:id="noteOk" layoutX="285.0" layoutY="287.0" mnemonicParsing="false" onAction="#noteHide" opacity="0.75" style="-fx-background-color: #6AA1D4;" text="Ok" />
       <ImageView fx:id="rightboatpos" fitHeight="25.0" fitWidth="52.0" layoutX="351.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="lefttboatpos" fitHeight="25.0" fitWidth="52.0" layoutX="82.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="63.0" fitWidth="101.0" layoutX="374.0" layoutY="7.0" onMouseClicked="#undo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/undo.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

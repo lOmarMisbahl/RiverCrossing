@@ -32,7 +32,7 @@ public class Main extends Application {
         launch(args);
         Originator originator = new Originator();
         CareTacker careTaker = new CareTacker();
-        GameEngineData data = new GameEngineData();
+        GameEngineData data = new GameEngineData(GameEngine.getInstance());
       //  while (game is on) data = game engine data
         originator.setState(data);
         careTaker.addundo(originator.saveStateToMemento());
