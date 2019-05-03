@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.74">
          <image>
@@ -19,7 +20,7 @@
             <Image url="@Images/hint.png" />
          </image>
       </ImageView>
-      <Button layoutY="371.0" mnemonicParsing="false" onAction="#goToMenu" opacity="0.75" style="-fx-background-color: #6AA1D4;" text="Exit" />
+      <Button layoutY="371.0" mnemonicParsing="false" onAction="#goToMainMenu" opacity="0.75" style="-fx-background-color: #6AA1D4;" text="Exit" />
       <ImageView fx:id="Crosser1" fitHeight="70.0" fitWidth="52.0" layoutX="6.0" layoutY="200.0" onMouseClicked="#moveCrosser" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="Crosser3" fitHeight="70.0" fitWidth="52.0" layoutX="101.0" layoutY="200.0" onMouseClicked="#moveCrosser" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="Crosser4" fitHeight="70.0" fitWidth="52.0" layoutX="160.0" layoutY="200.0" onMouseClicked="#moveCrosser" pickOnBounds="true" preserveRatio="true" />
@@ -36,11 +37,25 @@
             </ImageView>
          </children>
       </VBox>
-      <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="496.0" layoutY="321.0" onMouseClicked="#moveBoat" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="537.0" layoutY="336.0" onMouseClicked="#moveBoat" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/go.png" />
          </image>
       </ImageView>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#goToMainMenu" opacity="0.75" style="-fx-background-color: #6AA1D4;" text="Save" />
+            <Button layoutX="65.0" layoutY="16.0" mnemonicParsing="false" onAction="#resetGame" opacity="0.75" style="-fx-background-color: #6AA1D4;" text="Reset" />
+         </children></AnchorPane>
+      <ImageView fx:id="Crosser5" fitHeight="70.0" fitWidth="52.0" layoutX="259.0" layoutY="1.0" onMouseClicked="#moveCrosser" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="note" fitHeight="281.0" fitWidth="376.0" layoutX="114.0" layoutY="58.0">
+         <image>
+            <Image url="@Images/alert.jpg" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="notetext" layoutX="174.0" layoutY="191.0" opacity="0.61" prefHeight="90.0" prefWidth="250.0" wrapText="true" />
+      <Button fx:id="noteOk" layoutX="285.0" layoutY="287.0" mnemonicParsing="false" onAction="#noteHide" opacity="0.75" style="-fx-background-color: #6AA1D4;" text="Ok" />
+      <ImageView fx:id="rightboatpos" fitHeight="25.0" fitWidth="52.0" layoutX="351.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="lefttboatpos" fitHeight="25.0" fitWidth="52.0" layoutX="82.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
