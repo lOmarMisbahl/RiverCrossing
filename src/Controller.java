@@ -74,16 +74,20 @@ public class Controller implements Initializable {
         LeftSide.getChildren().clear();
         Boat.getChildren().clear();
 
-        String y = new String();
-        notetext.setEditable(false);
-        noteOk.setVisible(true);
-        notetext.setVisible(true);
-        note.setVisible(true);
+
         fromLeftToRightBank = gameEngine.isBoatOnTheLeftBank();
-        for (String x:gameEngine.getInstructions()){
-            y +=( '\n' +x);
-        }
-        notetext.setText(y);
+            if(gameEngine.isNotification()) {
+                String y = new String();
+                notetext.setEditable(false);
+                noteOk.setVisible(true);
+                notetext.setVisible(true);
+                note.setVisible(true);
+                for (String x : gameEngine.getInstructions()) {
+                    y += ('\n' + x);
+                }
+                notetext.setText(y);
+                gameEngine.notificationShown();
+            }
         int i = 0;
 
         for (ICrosser I:
@@ -130,7 +134,7 @@ public class Controller implements Initializable {
             }
         }
         forceMoveBoat(fromLeftToRightBank);
-
+        checkUndoRedo();
 
     }
 
@@ -138,6 +142,11 @@ public class Controller implements Initializable {
     @FXML
     void undo(MouseEvent event) {
         gameEngine.undo();
+        loadItems();
+    }
+    @FXML
+    void redo(MouseEvent event) {
+        gameEngine.redo();
         loadItems();
     }
     @FXML
@@ -167,13 +176,8 @@ public class Controller implements Initializable {
     }
     @FXML
     void goToMainMenu(ActionEvent event) {
-        Originator originator = new Originator();
-        CareTacker careTaker = new CareTacker();
-        //  while (game is on) data = game engine data
-        originator.setState(gameEngine.getGameEngineData());
-        careTaker.addundo(originator.saveStateToMemento());
-        System.out.printf("saved");
-        /*
+
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Menu.fxml"));
             Scene scene = new Scene(loader.load());
@@ -181,7 +185,7 @@ public class Controller implements Initializable {
         }catch (Exception e){
             System.out.println("Error Loading Menu");
         }
-        */
+
     }
 
     @FXML
@@ -243,6 +247,7 @@ public class Controller implements Initializable {
     void moveCrosser(MouseEvent event){
         ImageView myImageView = ((ImageView)event.getSource());
         ICrosser myCrosser = myCrossers.get(myImageView);
+        addToMomento();
 
         if (myCrosser.isOnBoat()){
                 moveToSide(myImageView,fromLeftToRightBank);
@@ -259,7 +264,6 @@ public class Controller implements Initializable {
                 }
             }
         }
-
     }
     void moveToSide(ImageView A,Boolean fromLeftToRightBank){
         if (fromLeftToRightBank){
@@ -282,18 +286,24 @@ public class Controller implements Initializable {
     }
     @FXML
     void moveBoat(MouseEvent event) {
+
         if(gameEngine.canMove(gameEngine.getBoatRiders(),fromLeftToRightBank)) {
+            addToMomento();
             if (fromLeftToRightBank) {
                 BoatGroup.setLayoutX(RightSide.getLayoutX() + 10);
                 BoatGroup.setLayoutY(RightSide.getLayoutY() + BoatGroup.getHeight());
                 fromLeftToRightBank = false;
+                gameEngine.setBoatPosition("R");
             } else {
                 BoatGroup.setLayoutX(LeftSide.getLayoutX() + 10);
                 BoatGroup.setLayoutY(LeftSide.getLayoutY() + BoatGroup.getHeight() - 20);
                 fromLeftToRightBank = true;
+                gameEngine.setBoatPosition("L");
 
             }
+
         }
+
         gameEngine.Command(save);
     }
     private void forceMoveBoat(boolean fromLeftToRightBank){
@@ -314,6 +324,7 @@ public class Controller implements Initializable {
             ((Stage)((Node)event.getSource()).getScene().getWindow()).setScene(scene);
         }catch (Exception e){
             System.out.println("Error Loading Game");
+            e.printStackTrace();
         }
     }
 
@@ -331,5 +342,31 @@ public class Controller implements Initializable {
 
     }
 
+    @FXML
+    private ImageView undo;
 
+    @FXML
+    private ImageView redo;
+    void checkUndoRedo(){
+        if(gameEngine.canUndo()){
+            undo.setVisible(true);
+        }else {
+            undo.setVisible(false);
+        }
+        if(gameEngine.canRedo()){
+            redo.setVisible(true);
+        }else {
+            redo.setVisible(false);
+        }
+
+    }
+    void addToMomento(){
+        Originator originator = new Originator();
+        CareTacker careTaker = new CareTacker();
+        //  while (game is on) data = game engine data
+        originator.setState(gameEngine.getGameEngineData());
+        careTaker.addundo(originator.saveStateToMemento());
+        System.out.printf("saved");
+        checkUndoRedo();
+    }
 }

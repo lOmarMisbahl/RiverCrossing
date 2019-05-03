@@ -57,9 +57,14 @@
       <Button fx:id="noteOk" layoutX="285.0" layoutY="287.0" mnemonicParsing="false" onAction="#noteHide" opacity="0.75" style="-fx-background-color: #6AA1D4;" text="Ok" />
       <ImageView fx:id="rightboatpos" fitHeight="25.0" fitWidth="52.0" layoutX="351.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="lefttboatpos" fitHeight="25.0" fitWidth="52.0" layoutX="82.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="63.0" fitWidth="101.0" layoutX="374.0" layoutY="7.0" onMouseClicked="#undo" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="undo" fitHeight="46.0" fitWidth="46.0" layoutX="415.0" layoutY="7.0" onMouseClicked="#undo" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/undo.jpg" />
+            <Image url="@Images/undo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="redo" fitHeight="46.0" fitWidth="81.0" layoutX="467.0" layoutY="7.0" onMouseClicked="#redo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/redo.png" />
          </image>
       </ImageView>
    </children>

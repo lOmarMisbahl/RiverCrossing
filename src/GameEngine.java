@@ -14,6 +14,7 @@ public class GameEngine implements IGameController{
     List<ICrosser> leftBank = new ArrayList<ICrosser>();
     List<ICrosser> boatRiders = new ArrayList<ICrosser>();
     String boatPosition = "L";
+    private boolean notification ;
     int sails = 0;
     public static GameEngine getInstance() {
         return ourInstance;
@@ -26,7 +27,7 @@ public class GameEngine implements IGameController{
     @Override
     public void newGame(ICrossingStrategy gameStrategy) {
        this.gameStrategy = gameStrategy;
-
+        notification = true;
        leftBank.addAll(gameStrategy.getInitialCrossers());
         System.out.println("size of left"+leftBank.size());
         boatPosition = "L";
@@ -36,6 +37,7 @@ public class GameEngine implements IGameController{
 
     @Override
     public void resetGame() {
+        notification = true;
         leftBank.clear();
         leftBank.addAll(gameStrategy.getInitialCrossers());
         rightBank.clear();
@@ -46,6 +48,13 @@ public class GameEngine implements IGameController{
     }
     public ICrossingStrategy getGameStrategy() {
         return gameStrategy;
+    }
+    public void notificationShown(){
+        notification = false;
+    }
+
+    public boolean isNotification() {
+        return notification;
     }
 
     @Override
@@ -113,16 +122,13 @@ public class GameEngine implements IGameController{
     @Override
     public boolean canUndo() {
 
-        if(careTaker.getundo()==null)
-        { return  false;}
-        return true;
+        return  !careTaker.isUndoEmpty();
+
     }
 
     @Override
     public boolean canRedo() {
-        if(careTaker.getredo()==null)
-        { return  false;}
-        return true;
+        return !careTaker.isRedoEmpty();
 
     }
 
