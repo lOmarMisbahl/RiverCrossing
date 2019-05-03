@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -63,6 +64,7 @@ public class Controller implements Initializable {
     }
 
     void loadItems(){
+
         IV.clear();
         myCrossers.clear();
         IV.add(Crosser1);
@@ -93,8 +95,12 @@ public class Controller implements Initializable {
         for (ICrosser I:
                 gameEngine.getCrossersOnLeftBank() ) {
             try {
-
+                System.out.println("Loading Image Time");
+                long startTime = System.nanoTime();
                 Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
+                long endTime   = System.nanoTime();
+                long totalTime = endTime - startTime;
+                System.out.println(totalTime/1e9);
                 IV.get(i).setImage(image);
                 myCrossers.put(IV.get(i),I);
                 moveToSide(IV.get(i),true);
@@ -196,7 +202,15 @@ public class Controller implements Initializable {
     }
     @FXML
     void resume(ActionEvent event) {
-        //load game
+        gameEngine.loadGame();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Game.fxml"));
+            Scene scene = new Scene(loader.load());
+            ((Stage)((Node)event.getSource()).getScene().getWindow()).setScene(scene);
+        }catch (Exception e){
+            System.out.println("Error Loading Game");
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -301,7 +315,8 @@ public class Controller implements Initializable {
                 gameEngine.setBoatPosition("L");
 
             }
-
+            gameEngine.sail();
+            checkUndoRedo();
         }
 
         gameEngine.Command(save);
@@ -347,6 +362,8 @@ public class Controller implements Initializable {
 
     @FXML
     private ImageView redo;
+    @FXML
+    private Label score;
     void checkUndoRedo(){
         if(gameEngine.canUndo()){
             undo.setVisible(true);
@@ -358,6 +375,7 @@ public class Controller implements Initializable {
         }else {
             redo.setVisible(false);
         }
+        score.setText("Score : " +gameEngine.getNumberOfSails());
 
     }
     void addToMomento(){

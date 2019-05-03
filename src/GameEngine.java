@@ -26,6 +26,8 @@ public class GameEngine implements IGameController{
     CareTacker careTaker = new CareTacker();
     @Override
     public void newGame(ICrossingStrategy gameStrategy) {
+       originator = new Originator();
+       careTaker = new CareTacker();
        this.gameStrategy = gameStrategy;
         notification = true;
        leftBank.addAll(gameStrategy.getInitialCrossers());
@@ -37,6 +39,8 @@ public class GameEngine implements IGameController{
 
     @Override
     public void resetGame() {
+        originator = new Originator();
+        careTaker = new CareTacker();
         notification = true;
         leftBank.clear();
         leftBank.addAll(gameStrategy.getInitialCrossers());
@@ -84,6 +88,9 @@ public class GameEngine implements IGameController{
         this.boatPosition = boatPosition;
     }
 
+    public void sail(){
+        sails++;
+    }
 
     @Override
     public int getNumberOfSails() {
@@ -112,6 +119,8 @@ public class GameEngine implements IGameController{
 
     @Override
     public void doMove(List<ICrosser> crossers, boolean fromLeftToRightBank) {
+        sails++;
+
 
     }
 
@@ -159,6 +168,8 @@ public class GameEngine implements IGameController{
 
     @Override
     public void loadGame() {
+        originator = new Originator();
+        careTaker = new CareTacker();
 
     }
     //Not Implemented Yet
