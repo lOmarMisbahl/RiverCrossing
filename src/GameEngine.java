@@ -2,6 +2,7 @@ import Crossers.Farmer;
 import Crossers.ICrosser;
 import Strategy.ICrossingStrategy;
 import Strategy.LevelOne;
+import Strategy.LevelThree;
 import Strategy.LevelTwo;
 
 import java.util.ArrayList;
@@ -123,9 +124,17 @@ public class GameEngine implements IGameController{
 
 
         }catch (Exception e){
-            LevelTwo x = (LevelTwo) gameStrategy;//
-            return x.isValid(rightBank,leftBank,boatRiders);
 
+          try {
+
+
+              LevelTwo x = (LevelTwo) gameStrategy;//
+              return x.isValid(rightBank, leftBank, boatRiders);
+          }catch (Exception ee){
+              LevelThree x = (LevelThree) gameStrategy;//
+              return x.isValid(rightBank, leftBank, boatRiders);
+
+          }
 
         }
     }
@@ -173,7 +182,7 @@ public class GameEngine implements IGameController{
 
     @Override
     public void redo() {
-        
+
         originator.getStateFromMemento(careTaker.getredo());
         System.out.println("Current State: " + originator.getState());
         setThis(originator.getState());

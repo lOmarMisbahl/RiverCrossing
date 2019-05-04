@@ -2,11 +2,12 @@ package Strategy;
 import Crossers.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
 
-public class levelfour implements ICrossingStrategy  {
+public class LevelFour implements ICrossingStrategy  {
 
 
     @Override
@@ -41,18 +42,22 @@ public class levelfour implements ICrossingStrategy  {
     @Override
     public List<ICrosser> getInitialCrossers() {
         List<ICrosser> levelSceneRightBank = new ArrayList<ICrosser>();
-
-        Farmer person1 = new Farmer();
+        Factory z = new Factory();
+        Crosser person1 = z.getCrosser("Farmer");
         person1.setWeight(100);
+        person1.setLabelToBeShown("Farmer");
         levelSceneRightBank.add(person1);
-        Farmer person2 = new Farmer();
+        Crosser person2 =z.getCrosser("Farmer");
         person2.setWeight(100);
+        person2.setLabelToBeShown("Farmer");
         levelSceneRightBank.add(person2);
-        Farmer child1= new Farmer();
+        Crosser child1= z.getCrosser("Farmer");
         child1.setWeight(50);
+        child1.setLabelToBeShown("child");
         levelSceneRightBank.add(child1);
-        Farmer child2 = new Farmer();
+        Crosser child2 =z.getCrosser("Farmer");
         child2.setWeight(50);
+        child2.setLabelToBeShown("child");
         levelSceneRightBank.add(child2);
 
         return levelSceneRightBank;
@@ -63,4 +68,15 @@ public class levelfour implements ICrossingStrategy  {
         String[] instructionfour = new String[]{"two workers and two children want to cross a river,rules:1)the craft can hold maximum one worker or two children,,everyone can row"};
         return instructionfour;
     }
+    @Override
+    public boolean isEnd(List<ICrosser> rightBankCrossers)
+    { boolean end=false;
+        int occurrences = Collections.frequency(rightBankCrossers, "Crosser");
+        System.out.println(occurrences);
+        if (occurrences==4)
+            end=true;
+        System.out.println(end);
+        return end;
+    }
+
 }

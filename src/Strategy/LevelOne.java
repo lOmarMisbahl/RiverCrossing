@@ -75,6 +75,7 @@ public class LevelOne implements ICrossingStrategy {
         String[] instructionOne = new String[]{"A farmer want to cross the river with a plant, a sheep and a wolf."," The wolf and the sheep cant stay together on the right bank "," the plant and the sheep cant stay together on the left bank. how to solve it? "};
         return instructionOne;
     }
+    @Override
     public boolean isEnd(List<ICrosser> rightBankCrossers)
     { boolean end=false;
       int occurrences = Collections.frequency(rightBankCrossers, "Crosser");
