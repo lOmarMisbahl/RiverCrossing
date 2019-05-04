@@ -109,7 +109,7 @@ public class LevelThree implements ICrossingStrategy {
     @Override
     public boolean isEnd(List<ICrosser> rightBankCrossers)
     { boolean end=false;
-        int occurrences = Collections.frequency(rightBankCrossers, "Crosser");
+        int occurrences =  rightBankCrossers.size();
         System.out.println(occurrences);
         if (occurrences==5)
             end=true;
