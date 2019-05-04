@@ -1,3 +1,5 @@
+package Strategy;
+
 import Crossers.*;
 
 public class Factory {

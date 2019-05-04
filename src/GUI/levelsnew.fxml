@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="586.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="1511.0">
          <children>
@@ -63,9 +65,9 @@
                                     <Image url="@Images/level.jpeg" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="275.0" fitWidth="200.0" layoutX="49.0" layoutY="41.0" onMouseClicked="#loadLevelOne" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="275.0" fitWidth="200.0" layoutX="49.0" layoutY="41.0" onMouseClicked="#loadLevelThree" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@Images/levelone.jpeg" />
+                                    <Image url="@Images/levelthree.jpeg" />
                                  </image>
                               </ImageView>
                            </children>
@@ -77,9 +79,9 @@
                                     <Image url="@Images/level.jpeg" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="275.0" fitWidth="200.0" layoutX="62.0" layoutY="41.0" onMouseClicked="#loadLevelTwo" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="275.0" fitWidth="200.0" layoutX="62.0" layoutY="41.0" onMouseClicked="#loadLevelFour" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@Images/leveltwo.jpeg" />
+                                    <Image url="@Images/levelfour.jpeg" />
                                  </image>
                               </ImageView>
                            </children>
@@ -95,7 +97,7 @@
                         </ImageView>
                         <ImageView fitHeight="275.0" fitWidth="200.0" layoutX="62.0" layoutY="41.0" onMouseClicked="#loadLevelTwo" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@Images/leveltwo.jpeg" />
+                              <Image url="@Images/Under-Construction.jpg" />
                            </image>
                         </ImageView>
                      </children>

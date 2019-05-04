@@ -1,9 +1,6 @@
 import Crossers.Farmer;
 import Crossers.ICrosser;
-import Strategy.ICrossingStrategy;
-import Strategy.LevelOne;
-import Strategy.LevelThree;
-import Strategy.LevelTwo;
+import Strategy.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,19 +118,18 @@ public class GameEngine implements IGameController{
         try{
             LevelOne x = (LevelOne) gameStrategy;//
             return x.isValid(rightBank,leftBank,boatRiders);
-
-
         }catch (Exception e){
-
           try {
-
-
               LevelTwo x = (LevelTwo) gameStrategy;//
               return x.isValid(rightBank, leftBank, boatRiders);
           }catch (Exception ee){
-              LevelThree x = (LevelThree) gameStrategy;//
-              return x.isValid(rightBank, leftBank, boatRiders);
-
+              try {
+                  LevelThree x = (LevelThree) gameStrategy;//
+                  return x.isValid(rightBank, leftBank, boatRiders);
+              }catch (Exception eee){
+                  LevelFour x = (LevelFour) gameStrategy;//
+                  return x.isValid(rightBank, leftBank, boatRiders);
+              }
           }
 
         }

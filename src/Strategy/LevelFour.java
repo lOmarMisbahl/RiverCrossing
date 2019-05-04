@@ -73,7 +73,7 @@ public class LevelFour implements ICrossingStrategy  {
     { boolean end=false;
         int occurrences = Collections.frequency(rightBankCrossers, "Crosser");
         System.out.println(occurrences);
-        if (occurrences==4)
+        if (occurrences==5)
             end=true;
         System.out.println(end);
         return end;

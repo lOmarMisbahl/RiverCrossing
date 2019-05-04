@@ -26,4 +26,5 @@ public interface ICrossingStrategy{
          * strategy, to be shown to the user
          */
         public String[] getInstructions();
+        public boolean isEnd(List<ICrosser> rightBankCrossers);
 }

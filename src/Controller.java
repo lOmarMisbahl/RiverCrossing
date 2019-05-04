@@ -9,9 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -53,11 +51,11 @@ public class Controller implements Initializable {
         }
         if (url.toString().contains("Game")) {
 
-        loadItems();
+            loadItems();
 
         }
     }
-        private class Multi extends Thread{
+    private class Multi extends Thread{
         ImageView x;
         ICrosser y;
         Multi(ImageView a,ICrosser b){
@@ -75,7 +73,7 @@ public class Controller implements Initializable {
             }
         }
     };
-        void loadItems(){
+    void loadItems(){
 
         IV.clear();
         myCrossers.clear();
@@ -90,22 +88,22 @@ public class Controller implements Initializable {
 
 
         fromLeftToRightBank = gameEngine.isBoatOnTheLeftBank();
-            if(gameEngine.isNotification()) {
-                String y = new String();
-                notetext.setEditable(false);
-                noteOk.setVisible(true);
-                notetext.setVisible(true);
-                note.setVisible(true);
-                for (String x : gameEngine.getInstructions()) {
-                    y += ('\n' + x);
-                }
-                notetext.setText(y);
-                gameEngine.notificationShown();
-            }else {
-                noteOk.setVisible(false);
-                notetext.setVisible(false);
-                note.setVisible(false);
+        if(gameEngine.isNotification()) {
+            String y = new String();
+            notetext.setEditable(false);
+            noteOk.setVisible(true);
+            notetext.setVisible(true);
+            note.setVisible(true);
+            for (String x : gameEngine.getInstructions()) {
+                y += ('\n' + x);
             }
+            notetext.setText(y);
+            gameEngine.notificationShown();
+        }else {
+            noteOk.setVisible(false);
+            notetext.setVisible(false);
+            note.setVisible(false);
+        }
         int i = 0;
 
         for (ICrosser I:
@@ -113,7 +111,7 @@ public class Controller implements Initializable {
             try {
                 System.out.println("Loading Image...");
                 long startTime = System.nanoTime();
-               // Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
+                // Image image = SwingFXUtils.toFXImage(I.getImages().get(0), null);
 
                 //IV.get(i).setImage(image);
                 (new Multi(IV.get(i),I)).start();
@@ -237,7 +235,7 @@ public class Controller implements Initializable {
     void loadLevels(ActionEvent event) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/levels.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/levelsnew.fxml"));
             Scene scene = new Scene(loader.load());
             ((Stage)((Node)event.getSource()).getScene().getWindow()).setScene(scene);
         }catch (Exception e){
@@ -279,16 +277,16 @@ public class Controller implements Initializable {
     private boolean fromLeftToRightBank = true;
     @FXML
     void moveCrosser(MouseEvent event){
-       // ImageView myImageView = ((ImageView)event.getSource());
+        // ImageView myImageView = ((ImageView)event.getSource());
         VBox myImageView =(VBox) ((ImageView)event.getSource()).getParent();
         ICrosser myCrosser = myCrossers.get(myImageView.getChildren().get(1));
         addToMomento();
 
         if(gameEngine.getBoatRiders().contains(myCrosser)){ //(myCrosser.isOnBoat()){
-                moveToSide(myImageView,fromLeftToRightBank);
-                ArrayList<ICrosser> tmp = new ArrayList<>();
-                tmp.add(myCrosser);
-                gameEngine.doMove(tmp,fromLeftToRightBank);
+            moveToSide(myImageView,fromLeftToRightBank);
+            ArrayList<ICrosser> tmp = new ArrayList<>();
+            tmp.add(myCrosser);
+            gameEngine.doMove(tmp,fromLeftToRightBank);
 
         }else {
             if (gameEngine.getCrossersOnLeftBank().contains(myCrosser)&&fromLeftToRightBank){
@@ -379,7 +377,32 @@ public class Controller implements Initializable {
         }
 
     }
+    @FXML
+    void loadLevelThree(MouseEvent event) {
 
+        gameEngine.newGame(new LevelThree());
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Game.fxml"));
+            Scene scene = new Scene(loader.load());
+            ((Stage)((Node)event.getSource()).getScene().getWindow()).setScene(scene);
+        }catch (Exception e){
+            System.out.println("Error Loading Game");
+        }
+
+    }
+    @FXML
+    void loadLevelFour(MouseEvent event) {
+
+        gameEngine.newGame(new LevelFour());
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Game.fxml"));
+            Scene scene = new Scene(loader.load());
+            ((Stage)((Node)event.getSource()).getScene().getWindow()).setScene(scene);
+        }catch (Exception e){
+            System.out.println("Error Loading Game");
+        }
+
+    }
     @FXML
     private ImageView undo;
 
@@ -400,6 +423,11 @@ public class Controller implements Initializable {
         }
         score.setText("Score : " +gameEngine.getNumberOfSails());
 
+        if (gameEngine.getGameStrategy().isEnd(gameEngine.getCrossersOnRightBank())){
+            Notification("Congratulations you Won !");
+
+        }
+
     }
     void addToMomento(){
         Originator originator = gameEngine.getOriginator();
@@ -419,6 +447,14 @@ public class Controller implements Initializable {
     @FXML
     void save(ActionEvent event) {
         gameEngine.saveGame();
+    }
+    void Notification(String message){
+        //Alert alert = new Alert(Alert.AlertType.ERROR, message  , ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message  , ButtonType.OK);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+            //do stuff
+        }
     }
 
 }
