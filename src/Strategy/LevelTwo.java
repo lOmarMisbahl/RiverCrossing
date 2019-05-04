@@ -3,6 +3,7 @@ import Crossers.*;
 import Strategy.ICrossingStrategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LevelTwo implements ICrossingStrategy {
@@ -42,19 +43,20 @@ public class LevelTwo implements ICrossingStrategy {
         Plant plant = new Plant();
         levelSceneRightBank.add(plant);
         return levelSceneRightBank;*/
-        Farmer farmer1 = new Farmer();
+        Factory y = new Factory();
+        Crosser farmer1 = y.getCrosser("Farmer");
         farmer1.setWeight(90);
         levelSceneRightBank.add(farmer1);
-        Farmer farmer2 = new Farmer();
+        Crosser farmer2 = y.getCrosser("Farmer");
         farmer2.setWeight(80);
         levelSceneRightBank.add(farmer2);
-        Farmer farmer3= new Farmer();
+        Crosser farmer3 = y.getCrosser("Farmer");
         farmer3.setWeight(60);
         levelSceneRightBank.add(farmer3);
-        Farmer farmer4 = new Farmer();
+        Crosser farmer4 = y.getCrosser("Farmer");
         farmer4.setWeight(40);
         levelSceneRightBank.add(farmer4);
-        Sheep sheeplvltwo =new Sheep();
+        Crosser sheeplvltwo =y.getCrosser("Sheep");
         sheeplvltwo.setWeight(20);
         levelSceneRightBank.add(sheeplvltwo);
         return levelSceneRightBank;
@@ -64,4 +66,15 @@ public class LevelTwo implements ICrossingStrategy {
     public String[] getInstructions() {
         String[] instructionTwo = new String[]{" Four  farmers with their sheeps  want to cross the river their weights are 90,80,60 and 40kg and the max weight on boat is 100kg, how can they cross?"};
         return instructionTwo;}
+    @Override
+    public boolean isEnd(List<ICrosser> rightBankCrossers)
+    { boolean end=false;
+        int occurrences = Collections.frequency(rightBankCrossers, "Crosser");
+        System.out.println(occurrences);
+        if (occurrences==5)
+            end=true;
+        System.out.println(end);
+        return end;
+    }
+
 }

@@ -2,6 +2,7 @@ package Strategy;
 import Crossers.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LevelThree implements ICrossingStrategy {
@@ -105,4 +106,15 @@ public class LevelThree implements ICrossingStrategy {
         String[] instructionThree = new String[]{" Five farmers want to cross the river but each one dislike his neighbor, the can only hold two people, how can they cross the river? "};
         return instructionThree;
     }
+    @Override
+    public boolean isEnd(List<ICrosser> rightBankCrossers)
+    { boolean end=false;
+        int occurrences = Collections.frequency(rightBankCrossers, "Crosser");
+        System.out.println(occurrences);
+        if (occurrences==5)
+            end=true;
+        System.out.println(end);
+        return end;
+    }
+
 }
