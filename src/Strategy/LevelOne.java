@@ -3,6 +3,7 @@ import Crossers.*;
 import sun.security.smartcardio.SunPCSC;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LevelOne implements ICrossingStrategy {
@@ -56,13 +57,15 @@ public class LevelOne implements ICrossingStrategy {
     @Override
     public List<ICrosser> getInitialCrossers() {
         List<ICrosser> levelSceneRightBank = new ArrayList<ICrosser>();
-        Carnivorous wolf =new Wolf();
+        Factory x= new Factory();
+        Crosser wolf =x.getCrosser("Wolf");
         levelSceneRightBank.add(wolf);
-        Herbivorous sheep = new Sheep();
+        Crosser sheep = x.getCrosser("Sheep");
         levelSceneRightBank.add(sheep);
-        Farmer farmer = new Farmer();
+        Crosser farmer =x.getCrosser("Farmer");
+       // Farmer farmer = new Farmer();
         levelSceneRightBank.add(farmer);
-        Plant plant = new Plant();
+        Crosser plant = x.getCrosser("plant");
         levelSceneRightBank.add(plant);
         return levelSceneRightBank;
     }
@@ -72,4 +75,14 @@ public class LevelOne implements ICrossingStrategy {
         String[] instructionOne = new String[]{"A farmer want to cross the river with a plant, a sheep and a wolf."," The wolf and the sheep cant stay together on the right bank "," the plant and the sheep cant stay together on the left bank. how to solve it? "};
         return instructionOne;
     }
+    public boolean isEnd(List<ICrosser> rightBankCrossers)
+    { boolean end=false;
+      int occurrences = Collections.frequency(rightBankCrossers, "Crosser");
+        System.out.println(occurrences);
+        if (occurrences==4)
+          end=true;
+        System.out.println(end);
+        return end;
+    }
+
 }
