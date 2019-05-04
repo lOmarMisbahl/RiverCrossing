@@ -47,7 +47,7 @@
       </ImageView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#goToMainMenu" opacity="0.75" style="-fx-background-color: #6AA1D4;" text="Save" />
+            <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#save" opacity="0.75" style="-fx-background-color: #6AA1D4;" text="Save" />
             <Button layoutX="65.0" layoutY="16.0" mnemonicParsing="false" onAction="#resetGame" opacity="0.75" style="-fx-background-color: #6AA1D4;" text="Reset" />
          </children></AnchorPane>
       <ImageView fx:id="Crosser5" fitHeight="70.0" fitWidth="52.0" layoutX="259.0" layoutY="1.0" onMouseClicked="#moveCrosser" pickOnBounds="true" preserveRatio="true" />

@@ -24,9 +24,6 @@ import java.util.*;
 
 public class Controller implements Initializable {
 
-     private Save save = new Save();
-     private Load load = new Load();
-
     GameEngine gameEngine;
     @FXML
     private ImageView Crosser1;
@@ -104,6 +101,10 @@ public class Controller implements Initializable {
                 }
                 notetext.setText(y);
                 gameEngine.notificationShown();
+            }else {
+                noteOk.setVisible(false);
+                notetext.setVisible(false);
+                note.setVisible(false);
             }
         int i = 0;
 
@@ -220,6 +221,7 @@ public class Controller implements Initializable {
     }
     @FXML
     void resume(ActionEvent event) {
+
         gameEngine.loadGame();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Game.fxml"));
@@ -340,7 +342,7 @@ public class Controller implements Initializable {
             checkUndoRedo();
         }
 
-        gameEngine.Command(save);
+
     }
     private void forceMoveBoat(boolean fromLeftToRightBank){
         if (!fromLeftToRightBank) {
@@ -413,4 +415,10 @@ public class Controller implements Initializable {
     void closeWindow(ActionEvent event) {
         ((Stage)((Node)event.getSource()).getScene().getWindow()).close();
     }
+
+    @FXML
+    void save(ActionEvent event) {
+        gameEngine.saveGame();
+    }
+
 }

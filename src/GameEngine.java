@@ -18,6 +18,11 @@ public class GameEngine implements IGameController{
     private int sails = 0;
     private Originator originator = new Originator();
     private CareTacker careTaker = new CareTacker();
+    FileManager fileManager = new FileManager();
+
+    private Save save = new Save();
+    private Load load = new Load();
+
     public static GameEngine getInstance() {
         return ourInstance;
     }
@@ -48,6 +53,11 @@ public class GameEngine implements IGameController{
     public ICrossingStrategy getGameStrategy() {
         return gameStrategy;
     }
+
+    public void setGameStrategy(ICrossingStrategy gameStrategy) {
+        this.gameStrategy = gameStrategy;
+    }
+
     public void notificationShown(){
         notification = false;
     }
@@ -172,6 +182,7 @@ public class GameEngine implements IGameController{
     /******Save/Load ***************/
     @Override
     public void saveGame() {
+        fileManager.Command(save);
 
     }
 
@@ -179,6 +190,11 @@ public class GameEngine implements IGameController{
     public void loadGame() {
         originator = new Originator();
         careTaker = new CareTacker();
+        leftBank.clear();
+        rightBank.clear();
+        boatRiders.clear();
+        notification = false;
+        fileManager.Command(load);
 
     }
     //Not Implemented Yet
@@ -203,9 +219,7 @@ public class GameEngine implements IGameController{
             return false;
         }
     }
-    public void Command(Command Order){
-        Order.Execute();
-    }
+
     public int getLevelNumber(){
         if (gameStrategy instanceof LevelOne ){
             return 1;
