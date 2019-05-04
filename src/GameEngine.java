@@ -255,4 +255,26 @@ public class GameEngine implements IGameController{
     public CareTacker getCareTaker() {
         return careTaker;
     }
+
+    public boolean isEnd() {
+        try{
+            LevelOne x = (LevelOne) gameStrategy;//
+            return x.isEnd(rightBank);
+        }catch (Exception e){
+            try {
+                LevelTwo x = (LevelTwo) gameStrategy;//
+                return x.isEnd(rightBank);
+            }catch (Exception ee){
+                try {
+                    LevelThree x = (LevelThree) gameStrategy;//
+                    return x.isEnd(rightBank);
+                }catch (Exception eee){
+                    LevelFour x = (LevelFour) gameStrategy;//
+                    return x.isEnd(rightBank);
+                }
+            }
+
+        }
+
+    }
 }

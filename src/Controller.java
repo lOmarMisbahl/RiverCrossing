@@ -299,6 +299,7 @@ public class Controller implements Initializable {
                 }
             }
         }
+        checkUndoRedo();
     }
     void moveToSide(VBox A,Boolean fromLeftToRightBank){
         if (fromLeftToRightBank){
@@ -321,7 +322,7 @@ public class Controller implements Initializable {
     }
     @FXML
     void moveBoat(MouseEvent event) {
-
+        checkUndoRedo();
         if(gameEngine.canMove(gameEngine.getBoatRiders(),fromLeftToRightBank)) {
             addToMomento();
             if (fromLeftToRightBank) {
@@ -384,7 +385,9 @@ public class Controller implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Game.fxml"));
             Scene scene = new Scene(loader.load());
+            System.out.println("here");
             ((Stage)((Node)event.getSource()).getScene().getWindow()).setScene(scene);
+            System.out.println("h22ere");
         }catch (Exception e){
             System.out.println("Error Loading Game");
         }
@@ -423,7 +426,7 @@ public class Controller implements Initializable {
         }
         score.setText("Score : " +gameEngine.getNumberOfSails());
 
-        if (gameEngine.getGameStrategy().isEnd(gameEngine.getCrossersOnRightBank())){
+        if (gameEngine.isEnd()){
             Notification("Congratulations you Won !");
 
         }

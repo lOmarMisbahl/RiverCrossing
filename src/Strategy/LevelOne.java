@@ -78,8 +78,8 @@ public class LevelOne implements ICrossingStrategy {
     @Override
     public boolean isEnd(List<ICrosser> rightBankCrossers)
     { boolean end=false;
-      int occurrences = Collections.frequency(rightBankCrossers, "Crosser");
-        System.out.println(occurrences);
+      int occurrences = rightBankCrossers.size();
+        System.out.println("occurrences"+occurrences);
         if (occurrences==4)
           end=true;
         System.out.println(end);
